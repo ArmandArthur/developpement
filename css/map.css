@@ -1,0 +1,46 @@
+#map{
+	width: 450px;
+	position:relative;
+}
+.icon{
+	width: 45px;
+	border: 1px solid black;
+	height:33px;
+	position:absolute;
+}
+
+.personnage_principal{
+	position:absolute;
+}
+
+.icon_fleche{
+	position:absolute;
+	width:45px;
+	height:33px;
+	cursor:pointer;
+}
+.fleche_bg{
+	background: url(../img/fleche_bg.gif) 10 4 no-repeat;
+}
+.fleche_hg{
+	background: url(../img/fleche_hg.gif) 10 4 no-repeat;
+}
+.fleche_mg{
+	background: url(../img/fleche_mg.gif) 10 4 no-repeat;
+}
+
+.fleche_bd{
+	background: url(../img/fleche_bd.gif) 10 4 no-repeat;
+}
+.fleche_hd{
+	background: url(../img/fleche_hd.gif) 10 4 no-repeat;
+}
+.fleche_md{
+	background: url(../img/fleche_md.gif) 10 4 no-repeat;
+}
+.fleche_hc{
+	background: url(../img/fleche_hc.gif) 10 4 no-repeat;
+}
+.fleche_bc{
+	background: url(../img/fleche_bc.gif) 10 4 no-repeat;
+}
