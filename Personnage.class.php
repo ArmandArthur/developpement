@@ -5,9 +5,11 @@ require_once 'CarteManager.class.php';
 class Personnage
 {
         // Attributs personnnage
-	private $degats;
+	private $degat;
 	private $id;
 	private $nom;
+        private $mouvement;
+        private $mouvementRestant;
 	private $pointDeVie;
 	private $pointDeVieRestant;
 	private $planId;
@@ -79,9 +81,9 @@ class Personnage
 		return $direction;
 	}
 	//Getters
-	public function getDegats()
+	public function getDegat()
 	{
-		return $this->degats;
+		return $this->degat;
 	}
 
 	public function getId()
@@ -89,6 +91,16 @@ class Personnage
 		return $this->id;
 	}
 
+        public function getMouvement()
+	{
+		return $this->mouvement;
+	}
+        
+        public function getMouvementRestant()
+	{
+		return $this->mouvementRestant;
+	}                   
+        
 	public function getNom()
 	{
 		return $this->nom;
@@ -120,9 +132,9 @@ class Personnage
 	}
 	
 	// Setters
-	public function setDegats($degats)
+	public function setDegat($degat)
 	{
-		$this->degats = $degats;
+		$this->degat = $degat;
 	}
 
 	public function setId($id)
@@ -130,6 +142,16 @@ class Personnage
 		$this->id = $id;
 	}
 
+        public function setMouvement($mouvement)
+	{
+		$this->mouvement = $mouvement;
+	}
+        
+        public function setMouvementRestant($mouvementRestant)
+	{
+		$this->mouvementRestant = $mouvementRestant;
+	}        
+        
 	public function setNom($nom)
 	{
 		$this->nom = $nom;

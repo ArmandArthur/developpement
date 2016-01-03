@@ -38,8 +38,10 @@ class PersonnageManager extends Manager
             UPDATE 
                     personnage
             SET 
-                    degats = :degats,
+                    degat = :degat,
                     nom = :nom,
+                    mouvement = :mouvement,
+                    mouvementRestant = :mouvementRestant,
                     pointDeVie = :pointDeVie,
                     pointDeVieRestant = :pointDeVieRestant,
                     planId = :planId,
@@ -47,9 +49,11 @@ class PersonnageManager extends Manager
                     positionY = :positionY
             WHERE id = :id');
 
-            $request->bindValue(':degats', $personnage->getDegats());
+            $request->bindValue(':degat', $personnage->getDegat());
             $request->bindValue(':id', $personnage->getId());
             $request->bindValue(':nom', $personnage->getNom());
+            $request->bindValue(':mouvement', $personnage->getMouvement());
+            $request->bindValue(':mouvementRestant', $personnage->getMouvementRestant());
             $request->bindValue(':pointDeVie', $personnage->getPointDeVie());
             $request->bindValue(':pointDeVieRestant',  $personnage->getPointDeVieRestant());
             $request->bindValue(':planId', $personnage->getPlanId());

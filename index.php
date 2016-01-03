@@ -1,4 +1,6 @@
 <?php
+session_start();
+$_SESSION['personnageCourant'] = 1;
 
 //Smarty
 require 'smarty-3.1.29/libs/Smarty.class.php';
@@ -20,33 +22,48 @@ $CarteManager = new CarteManager($db);
 $Carte = new Carte($CarteManager->get(1));
 
 $PersonnageManager = new PersonnageManager($db);
-$Personnage = new Personnage($PersonnageManager->get(1));
+$Personnage = new Personnage($PersonnageManager->get($_SESSION['personnageCourant']));
 
-foreach ($PersonnageManager->getAll(1) as $key => $item)
+foreach ($PersonnageManager->getAll($_SESSION['personnageCourant']) as $key => $item)
 {
     $Personnages[] = new Personnage($PersonnageManager->get($item['id']));
 }
 
 $direction = $Personnage->getDirection($Personnages, $Carte);
- 
+
+$smarty->assign('carte', $Carte);
+$smarty->assign('direction', $direction);
+$smarty->assign('personnage', $Personnage);
+$smarty->assign('personnages', $Personnages);
 ?>
 
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/map.css">
+<link rel="stylesheet" type="text/css" href="css/menu.css">
+<link rel="stylesheet" type="text/css" href="css/caracteristiques.css">
+<link rel="stylesheet" type="text/css" href="css/message.css">
 <script type="text/javascript" src="js/jquery-2.1.4.min.js" ></script>
 <script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
-<div id="map">
-	<?php
-	$smarty->assign('carte', $Carte);
-	$smarty->assign('direction', $direction);
-	$smarty->assign('personnage', $Personnage);
-	$smarty->assign('personnages', $Personnages);
-	$smarty->display('map.tpl');
-?>	
-</div>
+    <div id="message">
+    </div>
+    <div id="menu">
+        <?php
+        $smarty->display('menu.tpl'); 
+        ?>
+    </div>
+    <div id="map">
+        <?php
+            $smarty->display('map.tpl');  
+        ?>	
+    </div>
+    <div id="caracteristiques">
+        <?php
+        $smarty->display('caracteristiques.tpl');
+        ?>
+    </div>
 </body>
 </html>
 
