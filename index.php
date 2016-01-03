@@ -12,15 +12,22 @@ $db = new PDO('mysql:host=localhost;dbname=developpement', 'root','');
 
 //Class
 require_once 'CarteManager.class.php';
+require_once 'Carte.class.php';
 require_once 'PersonnageManager.class.php';
+require_once 'Personnage.class.php';
 
 $CarteManager = new CarteManager($db);
-$Carte = $CarteManager->get(1);
+$Carte = new Carte($CarteManager->get(1));
 
 $PersonnageManager = new PersonnageManager($db);
-$Personnage = $PersonnageManager->get(1);
- //$personnage = new Personnage(1);
- //echo $personnage->getNom();
+$Personnage = new Personnage($PersonnageManager->get(1));
+
+foreach ($PersonnageManager->getAll(1) as $key => $item)
+{
+    $Personnages[] = new Personnage($PersonnageManager->get($item['id']));
+}
+
+$direction = $Personnage->getDirection($Personnages, $Carte);
  
 ?>
 
@@ -34,7 +41,9 @@ $Personnage = $PersonnageManager->get(1);
 <div id="map">
 	<?php
 	$smarty->assign('carte', $Carte);
+	$smarty->assign('direction', $direction);
 	$smarty->assign('personnage', $Personnage);
+	$smarty->assign('personnages', $Personnages);
 	$smarty->display('map.tpl');
 ?>	
 </div>

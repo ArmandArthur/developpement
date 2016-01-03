@@ -1,6 +1,5 @@
 <?php
 require_once 'Manager.class.php';
-require_once 'Carte.class.php';
 
 class CarteManager extends Manager
 {	
@@ -16,7 +15,7 @@ class CarteManager extends Manager
         $request->execute();
         $resultat = $request->fetch(PDO::FETCH_ASSOC);
 		
-		return new Carte($resultat);
+            return $resultat;
 	}	
 		
 }

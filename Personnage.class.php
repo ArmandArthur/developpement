@@ -4,6 +4,7 @@ require_once 'CarteManager.class.php';
 
 class Personnage
 {
+        // Attributs personnnage
 	private $degats;
 	private $id;
 	private $nom;
@@ -12,11 +13,11 @@ class Personnage
 	private $planId;
 	private $positionX;
 	private $positionY;
-	
-	public function __construct($donnees) 
+
+	public function __construct(Array $donnees) 
 	{
-        $this->hydrate($donnees);
-    }
+            $this->hydrate($donnees);
+        }
 	
 	public function hydrate($donnees)
 	{
@@ -30,52 +31,52 @@ class Personnage
 			}
 		}
 	}
-	
+        
+	public function seDeplacer($positionX, $positionY)
+        {
+            $this->setPositionX($positionX);
+            $this->setPositionY($positionY);
+        }
+        
 	/*
-		Retourne la liste des déplacements possibles.
+            Retourne la liste des déplacements possibles.
 	*/
-	public function getDeplacementPossible()
+	public function getDirection($personnages, $carte)
 	{
 		$positionX = $this->getPositionX();
 		$positionY = $this->getPositionY();
-		$deplacementPossible = array();
-		$deplacementPossible[] = array('flecheX'=> $positionX - 1, 'flecheY'=> $positionY +1,'flecheClass'=> 'fleche_bg');
-		$deplacementPossible[] = array('flecheX'=> $positionX - 1, 'flecheY'=> $positionY,'flecheClass'=> 'fleche_mg');
-		$deplacementPossible[] = array('flecheX'=> $positionX - 1, 'flecheY'=> $positionY -1,'flecheClass'=> 'fleche_hg');
-		$deplacementPossible[] = array('flecheX'=> $positionX, 'flecheY'=> $positionY +1,'flecheClass'=> 'fleche_bc');
-		$deplacementPossible[] = array('flecheX'=> $positionX, 'flecheY'=> $positionY -1,'flecheClass'=> 'fleche_hc');
-		$deplacementPossible[] = array('flecheX'=> $positionX + 1, 'flecheY'=> $positionY +1,'flecheClass'=> 'fleche_bd');
-		$deplacementPossible[] = array('flecheX'=> $positionX + 1, 'flecheY'=> $positionY,'flecheClass'=> 'fleche_md');
-		$deplacementPossible[] = array('flecheX'=> $positionX + 1, 'flecheY'=> $positionY -1,'flecheClass'=> 'fleche_hd');
-		
-		// Trouver une solution
-		$db = new PDO('mysql:host=localhost;dbname=developpement', 'root','');
-		$CarteManager = new CarteManager($db);
-		$Carte = $CarteManager->get(1);
+                
+		$direction = array();
+		$direction[] = array('flecheX'=> $positionX - 1, 'flecheY'=> $positionY +1,'flecheClass'=> 'fleche_bg');
+		$direction[] = array('flecheX'=> $positionX - 1, 'flecheY'=> $positionY,'flecheClass'=> 'fleche_mg');
+		$direction[] = array('flecheX'=> $positionX - 1, 'flecheY'=> $positionY -1,'flecheClass'=> 'fleche_hg');
+		$direction[] = array('flecheX'=> $positionX, 'flecheY'=> $positionY +1,'flecheClass'=> 'fleche_bc');
+		$direction[] = array('flecheX'=> $positionX, 'flecheY'=> $positionY -1,'flecheClass'=> 'fleche_hc');
+		$direction[] = array('flecheX'=> $positionX + 1, 'flecheY'=> $positionY +1,'flecheClass'=> 'fleche_bd');
+		$direction[] = array('flecheX'=> $positionX + 1, 'flecheY'=> $positionY,'flecheClass'=> 'fleche_md');
+		$direction[] = array('flecheX'=> $positionX + 1, 'flecheY'=> $positionY -1,'flecheClass'=> 'fleche_hd');
 		
 		// Suppresion des flèches qui sortent de la carte
-		foreach($deplacementPossible as $key => $value)
+		foreach($direction as $key => $item)
 		{
-			foreach($value as $k => $item)
-			{
-				if($k == 'flecheX')
-				{
-					if($Carte->getLargeur() < $item)
-					{
-						unset($deplacementPossible[$key]);
-					}
-				}
-				if($k == 'flecheY')
-				{
-					if($Carte->getHauteur() < $item || 0 >= $item)
-					{
-						unset($deplacementPossible[$key]);
-					}
-				}
-				
-			}
+                    foreach($personnages as $personnage)
+                    {
+                        if($item['flecheX'] == $personnage->getPositionX() && $item['flecheY'] == $personnage->getPositionY() )
+                        {
+                            unset($direction[$key]);
+                        }
+                    }
+                    if($carte->getLargeur() < $item['flecheX'])
+                    {
+                        unset($direction[$key]);
+                    }
+                    if($carte->getHauteur() < $item['flecheY'] || 0 >= $item['flecheY'])
+                    {
+                        unset($direction[$key]);
+                    }
 		}
-		return $deplacementPossible;
+                
+		return $direction;
 	}
 	//Getters
 	public function getDegats()

@@ -8,7 +8,7 @@ class Carte
 	public function __construct($donnees) 
 	{
         $this->hydrate($donnees);
-    }
+        }
 	
 	public function hydrate($donnees)
 	{
@@ -23,7 +23,7 @@ class Carte
 		}
 	}	
 	
-	public function getHauteur()
+	public  function getHauteur()
 	{
 		return $this->hauteur;
 	}	
