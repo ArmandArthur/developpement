@@ -16,6 +16,8 @@ require_once 'CarteManager.class.php';
 require_once 'Carte.class.php';
 require_once 'PersonnageManager.class.php';
 require_once 'Personnage.class.php';
+require_once 'PersonnageType.class.php';
+require_once 'PersonnageTypeManager.class.php';
 
 if(isset($_REQUEST))
 {
@@ -27,6 +29,8 @@ if(isset($_REQUEST))
                         $Carte = new Carte($CarteManager->get(1));
                         $PersonnageManager = new PersonnageManager($db);
                         $Personnage = new Personnage($PersonnageManager->get($_SESSION['personnageCourant']));
+                        $PersonnageTypeManager = new PersonnageTypeManager($db);
+                        $PersonnageType = new PersonnageType($PersonnageTypeManager->get($Personnage->getPersonnageTypeId()));
                         
 			$positionX = $_REQUEST['positionX'];
 			$positionY = $_REQUEST['positionY'];
@@ -42,14 +46,15 @@ if(isset($_REQUEST))
                             $Personnage->getPositionX() == $positionX && $Personnage->getPositionY()+1 == $positionY ||
                             $Personnage->getPositionX() == $positionX && $Personnage->getPositionY()-1 == $positionY )                                                                  
                         {
-                            if($Personnage->getMouvementRestant() == 0)
+                            // Message warning 
+                            if($Personnage->getMouvement() == 0)
                             {
                                 $json['message'] = $smarty->fetch('message/messageMouvement.tpl');
                             }
                             else
                             {
                                 $Personnage->seDeplacer($positionX,$positionY);
-                                $Personnage->setMouvementRestant($Personnage->getMouvementRestant()-1);
+                                $Personnage->setMouvement($Personnage->getMouvement()-1);
                                 $PersonnageManager->update($Personnage);   
                             }
                         }
@@ -60,11 +65,12 @@ if(isset($_REQUEST))
                         }
 
                         $direction = $Personnage->getDirection($Personnages, $Carte);
-			$smarty->assign('carte', $Carte);
-			$smarty->assign('direction', $direction);
-			$smarty->assign('personnage', $Personnage);
+                        $smarty->assign('carte', $Carte);
+                        $smarty->assign('direction', $direction);
+                        $smarty->assign('personnage', $Personnage);
                         $smarty->assign('personnages', $Personnages);
-                        
+                        $smarty->assign('personnageType', $PersonnageType);
+
 			$json['map'] = utf8_encode($smarty->fetch('map.tpl'));
 			$json['caracteristiques'] = utf8_encode($smarty->fetch('caracteristiques.tpl'));
                         
@@ -80,7 +86,10 @@ if(isset($_REQUEST))
                         
                         $PersonnageManager = new PersonnageManager($db);
                         $Personnage = new Personnage($PersonnageManager->get($_SESSION['personnageCourant']));
-
+                        
+                        $PersonnageTypeManager = new PersonnageTypeManager($db);
+                        $PersonnageType = new PersonnageType($PersonnageTypeManager->get($Personnage->getPersonnageTypeId()));
+                        
                         foreach ($PersonnageManager->getAll($_SESSION['personnageCourant']) as $key => $item)
                         {
                             $Personnages[] = new Personnage($PersonnageManager->get($item['id']));
@@ -91,6 +100,7 @@ if(isset($_REQUEST))
 			$smarty->assign('direction', $direction);
 			$smarty->assign('personnage', $Personnage);
                         $smarty->assign('personnages', $Personnages);
+                        $smarty->assign('personnageType', $PersonnageType);
                         
                         $json = array();
 			$json['map'] = utf8_encode($smarty->fetch('map.tpl'));

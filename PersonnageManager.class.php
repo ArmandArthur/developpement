@@ -40,10 +40,9 @@ class PersonnageManager extends Manager
             SET 
                     degat = :degat,
                     nom = :nom,
+                    personnageTypeId = :personnageTypeId,
                     mouvement = :mouvement,
-                    mouvementRestant = :mouvementRestant,
                     pointDeVie = :pointDeVie,
-                    pointDeVieRestant = :pointDeVieRestant,
                     planId = :planId,
                     positionX = :positionX,
                     positionY = :positionY
@@ -51,11 +50,10 @@ class PersonnageManager extends Manager
 
             $request->bindValue(':degat', $personnage->getDegat());
             $request->bindValue(':id', $personnage->getId());
+            $request->bindValue(':personnageTypeId', $personnage->getPersonnageTypeId());
             $request->bindValue(':nom', $personnage->getNom());
             $request->bindValue(':mouvement', $personnage->getMouvement());
-            $request->bindValue(':mouvementRestant', $personnage->getMouvementRestant());
             $request->bindValue(':pointDeVie', $personnage->getPointDeVie());
-            $request->bindValue(':pointDeVieRestant',  $personnage->getPointDeVieRestant());
             $request->bindValue(':planId', $personnage->getPlanId());
             $request->bindValue(':positionX', $personnage->getPositionX());
             $request->bindValue(':positionY', $personnage->getPositionY());

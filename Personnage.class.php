@@ -7,11 +7,10 @@ class Personnage
         // Attributs personnnage
 	private $degat;
 	private $id;
+        private $personnageTypeId;
 	private $nom;
         private $mouvement;
-        private $mouvementRestant;
 	private $pointDeVie;
-	private $pointDeVieRestant;
 	private $planId;
 	private $positionX;
 	private $positionY;
@@ -94,12 +93,7 @@ class Personnage
         public function getMouvement()
 	{
 		return $this->mouvement;
-	}
-        
-        public function getMouvementRestant()
-	{
-		return $this->mouvementRestant;
-	}                   
+	}              
         
 	public function getNom()
 	{
@@ -110,10 +104,10 @@ class Personnage
 	{
 		return $this->pointDeVie;
 	}
-	
-	public function getPointDeVieRestant()
+        
+	public function getPersonnageTypeId()
 	{
-		return $this->pointDeVieRestant;
+		return $this->personnageTypeId;
 	}
 	
 	public function getPlanId()
@@ -146,12 +140,7 @@ class Personnage
 	{
 		$this->mouvement = $mouvement;
 	}
-        
-        public function setMouvementRestant($mouvementRestant)
-	{
-		$this->mouvementRestant = $mouvementRestant;
-	}        
-        
+              
 	public function setNom($nom)
 	{
 		$this->nom = $nom;
@@ -161,10 +150,10 @@ class Personnage
 	{
 		$this->pointDeVie = $pointDeVie;
 	}
-	
-	public function setPointDeVieRestant($pointDeVieRestant)
+        
+        public function setPersonnageTypeId($personnageTypeId)
 	{
-		$this->pointDeVieRestant = $pointDeVieRestant;
+		$this->personnageTypeId = $personnageTypeId;
 	}
 	
 	public function setPlanId($planId)

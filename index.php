@@ -17,6 +17,8 @@ require_once 'CarteManager.class.php';
 require_once 'Carte.class.php';
 require_once 'PersonnageManager.class.php';
 require_once 'Personnage.class.php';
+require_once 'PersonnageType.class.php';
+require_once 'PersonnageTypeManager.class.php';
 
 $CarteManager = new CarteManager($db);
 $Carte = new Carte($CarteManager->get(1));
@@ -31,10 +33,14 @@ foreach ($PersonnageManager->getAll($_SESSION['personnageCourant']) as $key => $
 
 $direction = $Personnage->getDirection($Personnages, $Carte);
 
+$PersonnageTypeManager = new PersonnageTypeManager($db);
+$PersonnageType = new PersonnageType($PersonnageTypeManager->get($Personnage->getPersonnageTypeId()));
+
 $smarty->assign('carte', $Carte);
 $smarty->assign('direction', $direction);
 $smarty->assign('personnage', $Personnage);
 $smarty->assign('personnages', $Personnages);
+$smarty->assign('personnageType', $PersonnageType);
 ?>
 
 <html>
