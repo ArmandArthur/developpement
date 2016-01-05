@@ -1,9 +1,9 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.1.14
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 03 Janvier 2016 à 16:31
+-- Généré le :  Mar 05 Janvier 2016 à 01:38
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -53,7 +53,10 @@ INSERT INTO `carte` (`id`, `nom`, `hauteur`, `largeur`) VALUES
 DROP TABLE IF EXISTS `personnage`;
 CREATE TABLE IF NOT EXISTS `personnage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `degats` int(20) NOT NULL,
+  `personnageTypeId` int(5) NOT NULL,
+  `degat` int(20) NOT NULL,
+  `mouvement` int(5) NOT NULL,
+  `mouvementRestant` int(5) NOT NULL,
   `nom` varchar(200) NOT NULL,
   `pointDeVie` int(10) NOT NULL,
   `pointDeVieRestant` int(10) NOT NULL,
@@ -67,42 +70,34 @@ CREATE TABLE IF NOT EXISTS `personnage` (
 -- Contenu de la table `personnage`
 --
 
-INSERT INTO `personnage` (`id`, `degats`, `nom`, `pointDeVie`, `pointDeVieRestant`, `planId`, `positionX`, `positionY`) VALUES
-(1, 12, 'Cerbère', 100, 70, 1, 14, 14),
-(2, 20, 'Pourpre', 100, 50, 1, 5, 5),
-(3, 12, 'Nashtoon', 100, 20, 1, 6, 6),
-(4, 13, 'Lordx', 150, 20, 1, 15, 15),
-(5, 15, 'Lord Bachourad', 10, 150, 1, 14, 10);
---
--- Base de données :  `symfony`
---
-CREATE DATABASE IF NOT EXISTS `symfony` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `symfony`;
+INSERT INTO `personnage` (`id`, `personnageTypeId`, `degat`, `mouvement`, `mouvementRestant`, `nom`, `pointDeVie`, `pointDeVieRestant`, `planId`, `positionX`, `positionY`) VALUES
+(1, 1, 12, 0, 0, 'Cerbère', 100, 70, 1, 19, 15),
+(2, 1, 20, 0, 9, 'Pourpre', 100, 50, 1, 19, 12),
+(3, 1, 12, 45, 50, 'Nashtoon', 100, 20, 1, 16, 14),
+(4, 1, 13, 0, 60, 'Lordx', 150, 20, 1, 19, 14),
+(5, 1, 15, 64, 70, 'Lord Bachourad', 150, 10, 1, 18, 12);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Structure de la table `personnage_type`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `lastname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `adress` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `country` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `personnage_type`;
+CREATE TABLE IF NOT EXISTS `personnage_type` (
+  `id` int(5) NOT NULL,
+  `nom` varchar(100) NOT NULL,
+  `mouvement` int(5) NOT NULL,
+  `pointDeVie` int(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `user`
+-- Contenu de la table `personnage_type`
 --
 
-INSERT INTO `user` (`id`, `name`, `lastname`, `adress`, `country`) VALUES
-(9, 'Virginie', 'Ledine', '25 rue des orangers', 'France'),
-(10, 'Paul', 'Verger', '44 rue du Prince', 'France'),
-(11, 'Aketo', 'Le mic', '35 rue des Bobos', 'France');
+INSERT INTO `personnage_type` (`id`, `nom`, `mouvement`, `pointDeVie`) VALUES
+(1, 'Démon', 100, 100);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
