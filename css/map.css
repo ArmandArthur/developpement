@@ -1,6 +1,8 @@
 #map{
 	width: 450px;
 	position:relative;
+        float:left;
+        clear:left;
 }
 .icon{
 	width: 45px;
@@ -9,7 +11,7 @@
 	position:absolute;
 }
 
-.personnage_principal{
+.personnage_principal, .personnage{
 	position:absolute;
 }
 

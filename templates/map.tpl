@@ -1,6 +1,6 @@
 {for $vL=0 to $carte->getLargeur() -1}
     {for $vH=0 to $carte->getHauteur() -1}	
-	<div class="icon" id="icon-{$vL}-{$vH}" style="left:{math equation="x*y" x=45 y=$vL}px; top:{math equation="x*y" x=$vH y=33}px;"></div>
+	<div datapositionx="{$vL}" datapositiony="{$vH}" class="icon" style="left:{math equation="x*y" x=45 y=$vL}px; top:{math equation="x*y" x=$vH y=33}px;"></div>
     {/for}
 {/for}
 
@@ -10,5 +10,5 @@
 {/foreach}
 
 {foreach from=$personnages item=personnage}
-	<img class="personnage_principal" src="img/personnage.png" style="left:{math equation="x*y-45" x=$personnage->getPositionX() y=45}; top:{math equation="x*y-33" x=$personnage->getPositionY() y=33};";/>
+	<img class="personnage" dataId="{$personnage->getId()}" src="img/personnage.png" style="left:{math equation="x*y-45" x=$personnage->getPositionX() y=45}; top:{math equation="x*y-33" x=$personnage->getPositionY() y=33};";/>
 {/foreach}

@@ -33,12 +33,49 @@ class Personnage
 		}
 	}
         
+        public function setMort()
+        {
+            $this->setPlanId(0);
+        }
+        
+        public function isMort()
+        {
+            if($this->getPointDeVie() < 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        public function recevoirDegat($degat)
+        {
+            $this->setPointDeVie($this->getPointDeVie()-$degat);
+        }
+        
 	public function seDeplacer($positionX, $positionY)
         {
             $this->setPositionX($positionX);
             $this->setPositionY($positionY);
+            $this->setMouvement($this->getMouvement() - 1);
         }
-        
+
+        public function seToucher(Personnage $personnage)
+        {
+            if( ($this->positionX == $personnage->getPositionX()-1 && $this->positionY == $personnage->getPositionY() + 1)  ||
+                ($this->positionX == $personnage->getPositionX()-1 && $this->positionY == $personnage->getPositionY()) ||
+                ($this->positionX == $personnage->getPositionX()-1 && $this->positionY == $personnage->getPositionY() -1) ||
+                ($this->positionX == $personnage->getPositionX() && $this->positionY == $personnage->getPositionY() +1) ||
+                ($this->positionX == $personnage->getPositionX() && $this->positionY == $personnage->getPositionY() -1) ||
+                ($this->positionX == $personnage->getPositionX()+1 && $this->positionY == $personnage->getPositionY() + 1)  ||
+                ($this->positionX == $personnage->getPositionX()+1 && $this->positionY == $personnage->getPositionY()) ||
+                ($this->positionX == $personnage->getPositionX()+1 && $this->positionY == $personnage->getPositionY() -1) )
+            {
+                return true;
+            }
+        }
 	/*
             Retourne la liste des déplacements possibles.
 	*/

@@ -24,8 +24,11 @@ class PersonnageManager extends Manager
                     FROM 
                             personnage 
                     WHERE 
-                            id != :id');
+                            id != :id
+                    AND
+                        planId = :planId');
             $request->bindValue(':id', $id);
+            $request->bindValue(':planId', 1);
             $request->execute();
             $resultats = $request->fetchAll(PDO::FETCH_ASSOC);
 		

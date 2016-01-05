@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 05 Janvier 2016 à 01:38
+-- Généré le :  Mar 05 Janvier 2016 à 21:08
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -56,10 +56,8 @@ CREATE TABLE IF NOT EXISTS `personnage` (
   `personnageTypeId` int(5) NOT NULL,
   `degat` int(20) NOT NULL,
   `mouvement` int(5) NOT NULL,
-  `mouvementRestant` int(5) NOT NULL,
   `nom` varchar(200) NOT NULL,
   `pointDeVie` int(10) NOT NULL,
-  `pointDeVieRestant` int(10) NOT NULL,
   `planId` int(2) NOT NULL,
   `positionX` int(3) NOT NULL,
   `positionY` int(3) NOT NULL,
@@ -70,12 +68,12 @@ CREATE TABLE IF NOT EXISTS `personnage` (
 -- Contenu de la table `personnage`
 --
 
-INSERT INTO `personnage` (`id`, `personnageTypeId`, `degat`, `mouvement`, `mouvementRestant`, `nom`, `pointDeVie`, `pointDeVieRestant`, `planId`, `positionX`, `positionY`) VALUES
-(1, 1, 12, 0, 0, 'Cerbère', 100, 70, 1, 19, 15),
-(2, 1, 20, 0, 9, 'Pourpre', 100, 50, 1, 19, 12),
-(3, 1, 12, 45, 50, 'Nashtoon', 100, 20, 1, 16, 14),
-(4, 1, 13, 0, 60, 'Lordx', 150, 20, 1, 19, 14),
-(5, 1, 15, 64, 70, 'Lord Bachourad', 150, 10, 1, 18, 12);
+INSERT INTO `personnage` (`id`, `personnageTypeId`, `degat`, `mouvement`, `nom`, `pointDeVie`, `planId`, `positionX`, `positionY`) VALUES
+(1, 1, 12, 914, 'Cerbère', 100, 1, 17, 12),
+(2, 1, 20, 0, 'Pourpre', 544, 1, 19, 12),
+(3, 1, 12, 42, 'Nashtoon', 40, 0, 19, 13),
+(4, 1, 13, 0, 'Lordx', -54, 0, 19, 14),
+(5, 1, 15, 29, 'Lord Bachourad', -66, 0, 20, 7);
 
 -- --------------------------------------------------------
 

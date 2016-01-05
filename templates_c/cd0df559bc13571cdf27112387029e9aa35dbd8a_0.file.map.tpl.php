@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-01-03 15:43:03
+/* Smarty version 3.1.29, created on 2016-01-05 16:24:13
   from "C:\wamp\www\developpement\templates\map.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56893377ad3265_95690822',
+  'unifunc' => 'content_568be01de41365_76885339',
   'file_dependency' => 
   array (
     'cd0df559bc13571cdf27112387029e9aa35dbd8a' => 
     array (
       0 => 'C:\\wamp\\www\\developpement\\templates\\map.tpl',
-      1 => 1451832182,
+      1 => 1452007375,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56893377ad3265_95690822 ($_smarty_tpl) {
+function content_568be01de41365_76885339 ($_smarty_tpl) {
 if (!is_callable('smarty_function_math')) require_once 'C:\\wamp\\www\\developpement\\smarty-3.1.29\\libs\\plugins\\function.math.php';
 $_smarty_tpl->tpl_vars['vL'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['vL']->step = 1;$_smarty_tpl->tpl_vars['vL']->total = (int) ceil(($_smarty_tpl->tpl_vars['vL']->step > 0 ? $_smarty_tpl->tpl_vars['carte']->value->getLargeur()-1+1 - (0) : 0-($_smarty_tpl->tpl_vars['carte']->value->getLargeur()-1)+1)/abs($_smarty_tpl->tpl_vars['vL']->step));
 if ($_smarty_tpl->tpl_vars['vL']->total > 0) {
@@ -30,9 +30,9 @@ $_smarty_tpl->tpl_vars['vH'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['vH']-
 if ($_smarty_tpl->tpl_vars['vH']->total > 0) {
 for ($_smarty_tpl->tpl_vars['vH']->value = 0, $_smarty_tpl->tpl_vars['vH']->iteration = 1;$_smarty_tpl->tpl_vars['vH']->iteration <= $_smarty_tpl->tpl_vars['vH']->total;$_smarty_tpl->tpl_vars['vH']->value += $_smarty_tpl->tpl_vars['vH']->step, $_smarty_tpl->tpl_vars['vH']->iteration++) {
 $_smarty_tpl->tpl_vars['vH']->first = $_smarty_tpl->tpl_vars['vH']->iteration == 1;$_smarty_tpl->tpl_vars['vH']->last = $_smarty_tpl->tpl_vars['vH']->iteration == $_smarty_tpl->tpl_vars['vH']->total;?>	
-	<div class="icon" id="icon-<?php echo $_smarty_tpl->tpl_vars['vL']->value;?>
--<?php echo $_smarty_tpl->tpl_vars['vH']->value;?>
-" style="left:<?php echo smarty_function_math(array('equation'=>"x*y",'x'=>45,'y'=>$_smarty_tpl->tpl_vars['vL']->value),$_smarty_tpl);?>
+	<div datapositionx="<?php echo $_smarty_tpl->tpl_vars['vL']->value;?>
+" datapositiony="<?php echo $_smarty_tpl->tpl_vars['vH']->value;?>
+" class="icon" style="left:<?php echo smarty_function_math(array('equation'=>"x*y",'x'=>45,'y'=>$_smarty_tpl->tpl_vars['vL']->value),$_smarty_tpl);?>
 px; top:<?php echo smarty_function_math(array('equation'=>"x*y",'x'=>$_smarty_tpl->tpl_vars['vH']->value,'y'=>33),$_smarty_tpl);?>
 px;"></div>
     <?php }
@@ -85,7 +85,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['personnage']->value) {
 $_smarty_tpl->tpl_vars['personnage']->_loop = true;
 $__foreach_personnage_1_saved_local_item = $_smarty_tpl->tpl_vars['personnage'];
 ?>
-	<img class="personnage_principal" src="img/personnage.png" style="left:<?php echo smarty_function_math(array('equation'=>"x*y-45",'x'=>$_smarty_tpl->tpl_vars['personnage']->value->getPositionX(),'y'=>45),$_smarty_tpl);?>
+	<img class="personnage" dataId="<?php echo $_smarty_tpl->tpl_vars['personnage']->value->getId();?>
+" src="img/personnage.png" style="left:<?php echo smarty_function_math(array('equation'=>"x*y-45",'x'=>$_smarty_tpl->tpl_vars['personnage']->value->getPositionX(),'y'=>45),$_smarty_tpl);?>
 ; top:<?php echo smarty_function_math(array('equation'=>"x*y-33",'x'=>$_smarty_tpl->tpl_vars['personnage']->value->getPositionY(),'y'=>33),$_smarty_tpl);?>
 ;";/>
 <?php

@@ -26,12 +26,19 @@ $Carte = new Carte($CarteManager->get(1));
 $PersonnageManager = new PersonnageManager($db);
 $Personnage = new Personnage($PersonnageManager->get($_SESSION['personnageCourant']));
 
-foreach ($PersonnageManager->getAll($_SESSION['personnageCourant']) as $key => $item)
+$Personnages = array();
+
+if(count($PersonnageManager->getAll($_SESSION['personnageCourant'])) > 0)
 {
-    $Personnages[] = new Personnage($PersonnageManager->get($item['id']));
+    foreach ($PersonnageManager->getAll($_SESSION['personnageCourant']) as $key => $item) 
+    {
+        $Personnages[] = new Personnage($PersonnageManager->get($item['id']));
+    }
+     
+    
 }
 
-$direction = $Personnage->getDirection($Personnages, $Carte);
+ $direction = $Personnage->getDirection($Personnages, $Carte);
 
 $PersonnageTypeManager = new PersonnageTypeManager($db);
 $PersonnageType = new PersonnageType($PersonnageTypeManager->get($Personnage->getPersonnageTypeId()));
@@ -45,9 +52,10 @@ $smarty->assign('personnageType', $PersonnageType);
 
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/action.css">
 <link rel="stylesheet" type="text/css" href="css/map.css">
 <link rel="stylesheet" type="text/css" href="css/menu.css">
-<link rel="stylesheet" type="text/css" href="css/caracteristiques.css">
+<link rel="stylesheet" type="text/css" href="css/caracteristique.css">
 <link rel="stylesheet" type="text/css" href="css/message.css">
 <script type="text/javascript" src="js/jquery-2.1.4.min.js" ></script>
 <script type="text/javascript" src="js/script.js"></script>
@@ -65,9 +73,14 @@ $smarty->assign('personnageType', $PersonnageType);
             $smarty->display('map.tpl');  
         ?>	
     </div>
-    <div id="caracteristiques">
+    <div id="caracteristique">
         <?php
-        $smarty->display('caracteristiques.tpl');
+        $smarty->display('caracteristique.tpl');
+        ?>
+    </div>
+    <div id="action">
+        <?php
+        $smarty->display('action.tpl');
         ?>
     </div>
 </body>
