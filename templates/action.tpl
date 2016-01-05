@@ -1,0 +1,1 @@
+<img class="actionPersonnage" id="actionAttaque" src="img/attaque.gif" />
