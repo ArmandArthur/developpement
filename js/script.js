@@ -1,3 +1,5 @@
+var isAttaqueActive = false;
+
 $( document ).ready(function() {
 	var seDeplacerEvent = function(){
 		$(".icon_fleche").on("click", function() {
@@ -7,7 +9,10 @@ $( document ).ready(function() {
 			}).done(function(response) {
                                 updateDiv(response);
 				seDeplacerEvent();
-                                attaqueEvent();
+                                if(isAttaqueActive){
+                                    attaqueEvent();    
+                                }
+
                                 $('#message').hide();
 			});
 		});
@@ -50,10 +55,12 @@ $( document ).ready(function() {
                     $(".personnage").unbind('click');
                     $(this).removeClass("active");
                     $('#message').hide();
+                    isAttaqueActive = false;
                 }
                 else{
                     $(this).addClass("active");
                     attaqueEvent();
+                    isAttaqueActive = true;
                 }
             });
         };
