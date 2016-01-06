@@ -13,7 +13,6 @@ $( document ).ready(function() {
                                     attaqueEvent();    
                                 }
 
-                                $('#message').hide();
 			});
 		});
 	};	
@@ -26,7 +25,9 @@ $( document ).ready(function() {
                 }).done(function(response) {
                         updateDiv(response);
                         seDeplacerEvent();
-                        attaqueEvent();
+                        if(isAttaqueActive){
+                            attaqueEvent();    
+                        }
                         $('#message').hide();
                 });
             });

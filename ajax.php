@@ -15,6 +15,8 @@ $db = new PDO('mysql:host=localhost;dbname=developpement', 'root', '');
 //Class
 require_once 'CarteManager.class.php';
 require_once 'Carte.class.php';
+require_once 'JoueurManager.class.php';
+require_once 'Joueur.class.php';
 require_once 'PersonnageManager.class.php';
 require_once 'Personnage.class.php';
 require_once 'PersonnageType.class.php';
@@ -23,7 +25,16 @@ require_once 'PersonnageTypeManager.class.php';
 if (isset($_REQUEST)) {
     $action = $_REQUEST['action'];
     switch ($action):
-
+            case 'seLoguer':
+            $login = $_REQUEST['login'];
+            $JoueurManager = new JoueurManager($db);
+            $joueur = $JoueurManager->login($login);
+            if($joueur)
+            {
+                $_SESSION['idJoueurCourant'] = $joueur->id;
+                echo true;
+            }
+        break;
         case 'seDeplacer':
             $CarteManager = new CarteManager($db);
             $Carte = new Carte($CarteManager->get(1));
@@ -74,7 +85,6 @@ if (isset($_REQUEST)) {
 
             echo json_encode($json);
             break;
-        default:
         case 'selectPersonnage':
 
             $_SESSION['personnageCourant'] = $_REQUEST['selectedPersonnage'];
