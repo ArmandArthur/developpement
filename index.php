@@ -15,7 +15,7 @@ require_once 'JoueurManager.class.php';
 require_once 'Joueur.class.php';
 
 $JoueurManager = new JoueurManager($db);
-$listeJoueur = $JoueurManager->getAll();
+$listeJoueur = $JoueurManager->getListeJoueur();
 
 $Joueurs = array();
 if(count($listeJoueur) > 0)

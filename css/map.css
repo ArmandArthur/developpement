@@ -11,7 +11,9 @@
 	position:absolute;
 }
 
-.personnage_principal, .personnage{
+.personnage_principal, 
+.personnage_secondaire, 
+.personnage{
 	position:absolute;
 }
 

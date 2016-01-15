@@ -5,6 +5,7 @@ class PersonnageType
         // Attributs personnnage type
 	private $id;
 	private $nom;
+	private $nombreAttaque;        
         private $mouvement;
 	private $pointDeVie;	
 
@@ -41,7 +42,12 @@ class PersonnageType
 	{
 		return $this->nom;
 	}
-	
+        
+	public function getNombreAttaque()
+	{
+		return $this->nombreAttaque;
+	}
+        
 	public function getPointDeVie()
 	{
 		return $this->pointDeVie;
@@ -57,7 +63,12 @@ class PersonnageType
 	{
 		$this->nom = $nom;
 	}
-	
+
+	public function setNombreAttaque($nombreAttaque)
+	{
+		$this->nombreAttaque = $nombreAttaque;
+	}
+        
 	public function setPointDeVie($pointDeVie)
 	{
 		$this->pointDeVie = $pointDeVie;

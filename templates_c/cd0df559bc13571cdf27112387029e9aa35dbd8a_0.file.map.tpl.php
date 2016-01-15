@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-01-05 16:24:13
+/* Smarty version 3.1.29, created on 2016-01-12 17:29:52
   from "C:\wamp\www\developpement\templates\map.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_568be01de41365_76885339',
+  'unifunc' => 'content_56952a00653781_32694486',
   'file_dependency' => 
   array (
     'cd0df559bc13571cdf27112387029e9aa35dbd8a' => 
     array (
       0 => 'C:\\wamp\\www\\developpement\\templates\\map.tpl',
-      1 => 1452007375,
+      1 => 1452616083,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_568be01de41365_76885339 ($_smarty_tpl) {
+function content_56952a00653781_32694486 ($_smarty_tpl) {
 if (!is_callable('smarty_function_math')) require_once 'C:\\wamp\\www\\developpement\\smarty-3.1.29\\libs\\plugins\\function.math.php';
 $_smarty_tpl->tpl_vars['vL'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['vL']->step = 1;$_smarty_tpl->tpl_vars['vL']->total = (int) ceil(($_smarty_tpl->tpl_vars['vL']->step > 0 ? $_smarty_tpl->tpl_vars['carte']->value->getLargeur()-1+1 - (0) : 0-($_smarty_tpl->tpl_vars['carte']->value->getLargeur()-1)+1)/abs($_smarty_tpl->tpl_vars['vL']->step));
 if ($_smarty_tpl->tpl_vars['vL']->total > 0) {
@@ -85,7 +85,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['personnage']->value) {
 $_smarty_tpl->tpl_vars['personnage']->_loop = true;
 $__foreach_personnage_1_saved_local_item = $_smarty_tpl->tpl_vars['personnage'];
 ?>
-	<img class="personnage" dataId="<?php echo $_smarty_tpl->tpl_vars['personnage']->value->getId();?>
+	<img class="personnage_secondaire" dataId="<?php echo $_smarty_tpl->tpl_vars['personnage']->value->getId();?>
 " src="img/personnage.png" style="left:<?php echo smarty_function_math(array('equation'=>"x*y-45",'x'=>$_smarty_tpl->tpl_vars['personnage']->value->getPositionX(),'y'=>45),$_smarty_tpl);?>
 ; top:<?php echo smarty_function_math(array('equation'=>"x*y-33",'x'=>$_smarty_tpl->tpl_vars['personnage']->value->getPositionY(),'y'=>33),$_smarty_tpl);?>
 ;";/>
@@ -94,6 +94,30 @@ $_smarty_tpl->tpl_vars['personnage'] = $__foreach_personnage_1_saved_local_item;
 }
 if ($__foreach_personnage_1_saved_item) {
 $_smarty_tpl->tpl_vars['personnage'] = $__foreach_personnage_1_saved_item;
+}
+?>
+
+<?php
+$_from = $_smarty_tpl->tpl_vars['adversaires']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$__foreach_adversaire_2_saved_item = isset($_smarty_tpl->tpl_vars['adversaire']) ? $_smarty_tpl->tpl_vars['adversaire'] : false;
+$_smarty_tpl->tpl_vars['adversaire'] = new Smarty_Variable();
+$_smarty_tpl->tpl_vars['adversaire']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['adversaire']->value) {
+$_smarty_tpl->tpl_vars['adversaire']->_loop = true;
+$__foreach_adversaire_2_saved_local_item = $_smarty_tpl->tpl_vars['adversaire'];
+?>
+	<img class="personnage" dataId="<?php echo $_smarty_tpl->tpl_vars['adversaire']->value->getId();?>
+" src="img/adversaire.png" style="left:<?php echo smarty_function_math(array('equation'=>"x*y-45",'x'=>$_smarty_tpl->tpl_vars['adversaire']->value->getPositionX(),'y'=>45),$_smarty_tpl);?>
+; top:<?php echo smarty_function_math(array('equation'=>"x*y-33",'x'=>$_smarty_tpl->tpl_vars['adversaire']->value->getPositionY(),'y'=>33),$_smarty_tpl);?>
+;";/>
+<?php
+$_smarty_tpl->tpl_vars['adversaire'] = $__foreach_adversaire_2_saved_local_item;
+}
+if ($__foreach_adversaire_2_saved_item) {
+$_smarty_tpl->tpl_vars['adversaire'] = $__foreach_adversaire_2_saved_item;
 }
 }
 }

@@ -9,7 +9,7 @@ class PersonnageTypeManager extends Manager
         SELECT 
             * 
         FROM 
-            personnage_type 
+            personnageType 
         WHERE 
             id = :id');
         $request->bindValue(':id', $id);

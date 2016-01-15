@@ -9,11 +9,14 @@ class Personnage
 	private $id;
         private $personnageTypeId;
 	private $nom;
+        private $nombreAttaque;
         private $mouvement;
 	private $pointDeVie;
 	private $planId;
 	private $positionX;
 	private $positionY;
+	private $tourDeJeu;
+	private $prochainTourDeJeu;
 
 	public function __construct(Array $donnees) 
 	{
@@ -136,7 +139,12 @@ class Personnage
 	{
 		return $this->nom;
 	}
-	
+
+	public function getNombreAttaque()
+	{
+		return $this->nombreAttaque;
+	}
+        
 	public function getPointDeVie()
 	{
 		return $this->pointDeVie;
@@ -161,7 +169,17 @@ class Personnage
 	{
 		return $this->positionY;
 	}
-	
+
+	public function getTourDeJeu()
+	{
+		return $this->tourDeJeu;
+	}
+        
+        public function getProchainTourDeJeu()
+	{
+		return $this->prochainTourDeJeu;
+	}
+        
 	// Setters
 	public function setDegat($degat)
 	{
@@ -182,7 +200,12 @@ class Personnage
 	{
 		$this->nom = $nom;
 	}
-	
+
+	public function setNombreAttaque($nombreAttaque)
+	{
+		$this->nombreAttaque = $nombreAttaque;
+	}
+        
 	public function setPointDeVie($pointDeVie)
 	{
 		$this->pointDeVie = $pointDeVie;
@@ -207,7 +230,16 @@ class Personnage
 	{
 		$this->positionY = $positionY;
 	}
-	
+        
+	public function setTourDeJeu($tourDeJeu)
+	{
+		$this->tourDeJeu = $tourDeJeu;
+	}        
+        
+	public function setProchainTourDeJeu($prochainTourDeJeu)
+	{
+		$this->prochainTourDeJeu = $prochainTourDeJeu;
+	}  	
 }
 
 

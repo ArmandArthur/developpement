@@ -12,6 +12,7 @@ $( document ).ready(function() {
                                 if(isAttaqueActive){
                                     attaqueEvent();    
                                 }
+                                activerEvent();
 
 			});
 		});
@@ -28,6 +29,7 @@ $( document ).ready(function() {
                         if(isAttaqueActive){
                             attaqueEvent();    
                         }
+                        activerEvent();
                         $('#message').hide();
                 });
             });
@@ -78,6 +80,19 @@ $( document ).ready(function() {
                 });
             });  
         };
+        
+        var activerEvent = function(){
+            $("#finDeTour").bind("click", function() {
+                $.ajax({
+                  url: "ajax.php",
+                  data: { action:'activer'}
+                }).done(function(response) {
+                        updateDiv(response);
+                        activerEvent();
+                });
+            });  
+        };
+        activerEvent();
         seDeplacerEvent();
         selectPersonnageEvent();
         redimensionnnerMap();

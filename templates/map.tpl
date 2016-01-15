@@ -10,5 +10,9 @@
 {/foreach}
 
 {foreach from=$personnages item=personnage}
-	<img class="personnage" dataId="{$personnage->getId()}" src="img/personnage.png" style="left:{math equation="x*y-45" x=$personnage->getPositionX() y=45}; top:{math equation="x*y-33" x=$personnage->getPositionY() y=33};";/>
+	<img class="personnage_secondaire" dataId="{$personnage->getId()}" src="img/personnage.png" style="left:{math equation="x*y-45" x=$personnage->getPositionX() y=45}; top:{math equation="x*y-33" x=$personnage->getPositionY() y=33};";/>
+{/foreach}
+
+{foreach from=$adversaires item=adversaire}
+	<img class="personnage" dataId="{$adversaire->getId()}" src="img/adversaire.png" style="left:{math equation="x*y-45" x=$adversaire->getPositionX() y=45}; top:{math equation="x*y-33" x=$adversaire->getPositionY() y=33};";/>
 {/foreach}
