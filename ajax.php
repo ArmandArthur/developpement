@@ -12,7 +12,9 @@ $smarty->cache_lifetime = 120;
 //PDO
 $db = new PDO('mysql:host=localhost;dbname=developpement', 'root', '');
 
+//Constante
 require_once 'configJeu.php';
+
 //Class
 require_once 'CarteManager.class.php';
 require_once 'Carte.class.php';
@@ -90,6 +92,12 @@ if (isset($_REQUEST)) {
             }
         }
         $Personnage = new Personnage($PersonnageManager->get($_SESSION['personnageCourant']));
+        if( strtotime(date('Y-m-d H:i:s')) > strtotime($Personnage->getProchainTourDeJeu()) )
+        {
+            $Personnage->setMouvement(0);
+            $Personnage->setNombreAttaque(0);
+            $PersonnageManager->update($Personnage);
+        }
         
         $CarteManager = new CarteManager($db);
         $Carte = new Carte($CarteManager->get(1));

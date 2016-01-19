@@ -5,7 +5,7 @@ $( document ).ready(function() {
                   url: "ajax.php",
                   data: { login: $(this).val() , action:'seLoguer'}
                 }).done(function(response) {
-                    if(response){
+                    if(response == 1){
                         document.location.href = 'jeu.php';
                     }
                 });
