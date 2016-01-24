@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-01-23 18:00:26
+/* Smarty version 3.1.29, created on 2016-01-23 20:22:54
   from "C:\wamp\www\developpement\templates\menu.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56a3b1aa837aa1_62410002',
+  'unifunc' => 'content_56a3d30ed0dd36_51409173',
   'file_dependency' => 
   array (
     'fd23b1b070d22fda2aa3ea06561b80f73e6f0e52' => 
@@ -19,7 +19,8 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56a3b1aa837aa1_62410002 ($_smarty_tpl) {
+function content_56a3d30ed0dd36_51409173 ($_smarty_tpl) {
+$_smarty_tpl->compiled->nocache_hash = '348056a3d30ece3946_55323596';
 ?>
 <a href="">Admin carte</a>
 <select id="selectPersonnage">

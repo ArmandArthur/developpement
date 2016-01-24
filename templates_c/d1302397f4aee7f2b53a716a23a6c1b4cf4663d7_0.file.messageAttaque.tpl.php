@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-01-14 16:51:50
+/* Smarty version 3.1.29, created on 2016-01-23 20:23:45
   from "C:\wamp\www\developpement\templates\message\messageAttaque.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_5697c416a49044_97426243',
+  'unifunc' => 'content_56a3d3419680b4_68687705',
   'file_dependency' => 
   array (
     'd1302397f4aee7f2b53a716a23a6c1b4cf4663d7' => 
     array (
       0 => 'C:\\wamp\\www\\developpement\\templates\\message\\messageAttaque.tpl',
-      1 => 1452786698,
+      1 => 1453577016,
       2 => 'file',
     ),
   ),
@@ -19,13 +19,15 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_5697c416a49044_97426243 ($_smarty_tpl) {
+function content_56a3d3419680b4_68687705 ($_smarty_tpl) {
 ?>
 <div class="warning">
       <?php if ($_smarty_tpl->tpl_vars['seToucher']->value == false) {?>
         Vous devez être au contact de votre adversaire pour le frapper.
       <?php } elseif ($_smarty_tpl->tpl_vars['nombreAttaqueDisponible']->value == false) {?>
           Vous n'avez plus d'attaque de disponible
+      <?php } elseif ($_smarty_tpl->tpl_vars['tourDisponible']->value == false) {?>
+          Votre tour est expiré
       <?php } else { ?>
         Vous infligez <?php echo $_smarty_tpl->tpl_vars['personnage']->value->getDegat();?>
  dégats à <?php echo $_smarty_tpl->tpl_vars['personnageAttaquer']->value->getNom();?>

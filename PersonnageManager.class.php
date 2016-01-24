@@ -8,13 +8,22 @@ class PersonnageManager extends Manager
             $request = $this->db->prepare('
             SELECT 
                 personnage.*,
-                liaison_personnage_personnagetype.personnageTypeId
+                _personnage_personnagetype.personnageTypeId,
+                iconepersonnage.chemin
             FROM 
                 personnage
             INNER JOIN
-                liaison_personnage_personnagetype
+                _personnage_personnagetype
             ON
-                personnage.id = liaison_personnage_personnageType.personnageId
+                personnage.id = _personnage_personnageType.personnageId
+            LEFT JOIN
+                _iconepersonnage_personnage
+            ON
+                personnage.id = _iconepersonnage_personnage.personnageId
+            LEFT JOIN
+                iconepersonnage
+            ON
+                _iconepersonnage_personnage.iconePersonnageId = iconepersonnage.id                
             WHERE 
                 personnage.id = :id');
             $request->bindValue(':id', $id);
@@ -49,11 +58,11 @@ class PersonnageManager extends Manager
             FROM 
                 personnage
             INNER JOIN
-                liaison_joueur_personnage
+                _joueur_personnage
             ON 
-                personnage.id = liaison_joueur_personnage.personnageId
+                personnage.id = _joueur_personnage.personnageId
             WHERE 
-                liaison_joueur_personnage.joueurId != :joueurId
+                _joueur_personnage.joueurId != :joueurId
             AND
                 personnage.planId = :planId');
             $request->bindValue(':joueurId', $joueurId);
@@ -71,6 +80,7 @@ class PersonnageManager extends Manager
                     personnage
             SET 
                     degat = :degat,
+                    experience = :experience,
                     nom = :nom,
                     nombreAttaque = :nombreAttaque,
                     mouvement = :mouvement,
@@ -83,6 +93,7 @@ class PersonnageManager extends Manager
             WHERE id = :id');
 
             $request->bindValue(':degat', $personnage->getDegat());
+            $request->bindValue(':experience', $personnage->getExperience());
             $request->bindValue(':id', $personnage->getId());
             $request->bindValue(':nom', $personnage->getNom());
             $request->bindValue(':nombreAttaque', $personnage->getNombreAttaque());

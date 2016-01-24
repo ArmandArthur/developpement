@@ -1,6 +1,7 @@
 <?php
 session_start();
 session_destroy();
+
 //Smarty
 require 'smarty-3.1.29/libs/Smarty.class.php';
 $smarty = new Smarty;

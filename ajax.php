@@ -2,13 +2,6 @@
 
 session_start();
 
-//Smarty
-require 'smarty-3.1.29/libs/Smarty.class.php';
-$smarty = new Smarty;
-$smarty->debugging = false;
-$smarty->caching = false;
-$smarty->cache_lifetime = 120;
-
 //PDO
 $db = new PDO('mysql:host=localhost;dbname=developpement', 'root', '');
 
@@ -51,12 +44,9 @@ if (isset($_REQUEST)) {
                 // Mise à jour du personnage
                 $PersonnageManager->update($Personnage);
                 
-                $smarty->assign('personnage', $Personnage);
-                $smarty->assign('personnageType', $PersonnageType);
-                
-                $json['caracteristique'] = utf8_encode($smarty->fetch('caracteristique.tpl'));
-                echo json_encode($json);
             }
+             $_SESSION['ajax'] = true;
+            require_once 'jeu.php';
             
         break;        
         case 'seLoguer':
@@ -70,46 +60,16 @@ if (isset($_REQUEST)) {
             }
         break;
         case 'seDeplacer':
-
-        $json = array();
-        $Personnages = array();    
-        
-        $JoueurManager = new JoueurManager($db);
-        $Joueur = new Joueur($JoueurManager->get($_SESSION['idJoueurCourant']));
-        
-        $listePersonnage = $JoueurManager->getListePersonnageFromJoueur($Joueur->getId());
-        
+        $_SESSION['ajax'] = true;
+        $_SESSION['tourDisponible'] = true;    
         $PersonnageManager = new PersonnageManager($db);
-        foreach ($listePersonnage as $key => $item) 
-        {
-            if($item->id == $_SESSION['personnageCourant'])
-            {
-                $_SESSION['personnageCourant'] = $item->id;
-            }
-            else
-            {
-                $Personnages[] = new Personnage($PersonnageManager->get($item->id));       
-            }
-        }
+
         $Personnage = new Personnage($PersonnageManager->get($_SESSION['personnageCourant']));
-        if( strtotime(date('Y-m-d H:i:s')) > strtotime($Personnage->getProchainTourDeJeu()) )
-        {
-            $Personnage->setMouvement(0);
-            $Personnage->setNombreAttaque(0);
-            $PersonnageManager->update($Personnage);
-        }
         
-        $CarteManager = new CarteManager($db);
-        $Carte = new Carte($CarteManager->get(1));
-        
-        $PersonnageTypeManager = new PersonnageTypeManager($db);
-        $PersonnageType = new PersonnageType($PersonnageTypeManager->get($Personnage->getPersonnageTypeId()));
-
-
         $positionX = $_REQUEST['positionX'];
         $positionY = $_REQUEST['positionY'];
-            
-
+        if($Personnage->tourDisponible())
+        {
             // Verifie si l'utisateur n'a pas changé les données html5
             if ($Personnage->getPositionX() + 1 == $positionX && $Personnage->getPositionY() == $positionY ||
                     $Personnage->getPositionX() + 1 == $positionX && $Personnage->getPositionY() + 1 == $positionY ||
@@ -123,181 +83,84 @@ if (isset($_REQUEST)) {
                 // Message warning 
                 if ($Personnage->getMouvement() == 0) 
                 {
-                    $json['message'] = $smarty->fetch('message/messageMouvement.tpl');
+                    $_SESSION['messageMouvement'] = true;
                 } else 
                 {
                     $Personnage->seDeplacer($positionX, $positionY);
                     $PersonnageManager->update($Personnage);
                 }
             }
-            
-                $listeAdversaire = $PersonnageManager->getAdversaire($Joueur->getId(),$Personnage->getPlanId());
-                $Adversaires = array();
-                if(count($listeAdversaire) > 0)
-                {
-                    foreach ($listeAdversaire as $key => $item) 
-                    {
-                        $Adversaires[] = new Personnage($PersonnageManager->get($item->id));
-                    }
-                }
-            $PersonnagesTemp = array_merge($Personnages,$Adversaires);
-            $direction = $Personnage->getDirection($PersonnagesTemp, $Carte);
+        }
+        else
+        {
+            $_SESSION['messageMouvement'] = true;
+            $_SESSION['tourDisponible'] = false;
+        }
+
     
-            $smarty->assign('carte', $Carte);
-            $smarty->assign('direction', $direction);
-            $smarty->assign('personnage', $Personnage);
-            $smarty->assign('personnages', $Personnages);
-            $smarty->assign('adversaires', $Adversaires);
-            $smarty->assign('personnageType', $PersonnageType);
+        require_once 'jeu.php';
 
-            $json['map'] = utf8_encode($smarty->fetch('map.tpl'));
-            $json['caracteristique'] = utf8_encode($smarty->fetch('caracteristique.tpl'));
-
-            echo json_encode($json);
             break;
         case 'selectPersonnage':
-
+            $_SESSION['ajax'] = true;
             $_SESSION['personnageCourant'] = $_REQUEST['selectedPersonnage'];
 
-            $JoueurManager = new JoueurManager($db);
-             $Joueur = new Joueur($JoueurManager->get($_SESSION['idJoueurCourant']));
-             $listePersonnage = $JoueurManager->getListePersonnageFromJoueur($Joueur->getId());
-
-             $CarteManager = new CarteManager($db);
-             $Carte = new Carte($CarteManager->get(1));
-
-             $Personnages = array();
-             
-             $PersonnageManager = new PersonnageManager($db);
-             if(count($listePersonnage) > 0)
-             {
-                 foreach ($listePersonnage as $key => $item) 
-                 {
-                     $Personnages[] = new Personnage($PersonnageManager->get($item->id));
-                     if($item->id == $_SESSION['personnageCourant'])
-                     {
-                         $_SESSION['personnageCourant'] = $item->id;
-                     }
-                 }
-             }
-             
-             $Personnage = new Personnage($PersonnageManager->get($_SESSION['personnageCourant']));          
-            if( strtotime(date('Y-m-d H:i:s')) > strtotime($Personnage->getProchainTourDeJeu()) )
-             {
-                $Personnage->setMouvement(0);
-                $Personnage->setNombreAttaque(0);
-                $PersonnageManager->update($Personnage);
-             }
-             $PersonnageTypeManager = new PersonnageTypeManager($db);
-             $PersonnageType = new PersonnageType($PersonnageTypeManager->get($Personnage->getPersonnageTypeId()));
-
-            $listeAdversaire = $PersonnageManager->getAdversaire($Joueur->getId(),$Personnage->getPlanId());
-                $Adversaires = array();
-                if(count($listeAdversaire) > 0)
-                {
-                    foreach ($listeAdversaire as $key => $item) 
-                    {
-                        $Adversaires[] = new Personnage($PersonnageManager->get($item->id));
-                    }
-                }
-                
-             $PersonnagesTemp = array_merge($Personnages,$Adversaires);
-             $direction = $Personnage->getDirection($PersonnagesTemp, $Carte);
-             
-             $smarty->assign('carte', $Carte);
-             $smarty->assign('direction', $direction);
-             $smarty->assign('personnage', $Personnage);
-             $smarty->assign('personnages', $Personnages);
-             $smarty->assign('adversaires', $Adversaires);
-             $smarty->assign('personnageType', $PersonnageType);
-
-            $json = array();
-            $json['map'] = utf8_encode($smarty->fetch('map.tpl'));
-            $json['caracteristique'] = utf8_encode($smarty->fetch('caracteristique.tpl'));
-
-            echo json_encode($json);
+        require_once 'jeu.php';
             break;
 
         case 'attaquer':
+            $_SESSION['ajax'] = true;
+            $_SESSION['messageAttaque'] = true;
             $personnageAttaquerId = $_REQUEST['personnageAttaquerId'];
-
-            $JoueurManager = new JoueurManager($db);
-             $Joueur = new Joueur($JoueurManager->get($_SESSION['idJoueurCourant']));
-             $listePersonnage = $JoueurManager->getListePersonnageFromJoueur($Joueur->getId());
-
-             $CarteManager = new CarteManager($db);
-             $Carte = new Carte($CarteManager->get(1));
 
             $PersonnageManager = new PersonnageManager($db);
             $Personnage = new Personnage($PersonnageManager->get($_SESSION['personnageCourant']));
             $PersonnageAttaquer = new Personnage($PersonnageManager->get($personnageAttaquerId));
-
-             $Personnages = array();
-             if(count($listePersonnage) > 0)
-             {
-                 foreach ($listePersonnage as $key => $item) 
-                 {
-                     $Personnages[] = new Personnage($PersonnageManager->get($item->id));
-                     if($item->id == $_SESSION['personnageCourant'])
-                     {
-                         $_SESSION['personnageCourant'] = $item->id;
-                     }
-                 }
-             }             
+                   $_SESSION['personnage'] = $Personnage;
+                    $_SESSION['personnageAttaquer'] = $PersonnageAttaquer;
             $seToucher = false;
+            $_SESSION['seToucher'] = $seToucher;
             $nombreAttaqueDisponible = true;
+            $_SESSION['nombreAttaqueDisponible'] = $nombreAttaqueDisponible;
+            
             if($PersonnageAttaquer->seToucher($Personnage))
             {
                 $seToucher = true;
-                if($Personnage->getNombreAttaque() <= 0)
+                $_SESSION['seToucher'] = $seToucher;
+                if($Personnage->tourDisponible())
                 {
-                    $nombreAttaqueDisponible = false;
-                }    
-                else
-                {
-                    $Personnage->setNombreAttaque($Personnage->getNombreAttaque()-1);
-                    $PersonnageAttaquer->recevoirDegat($Personnage->getDegat());
-                    if($PersonnageAttaquer->isMort())
+                    
+                    $_SESSION['tourDisponible'] = true;
+                    if($Personnage->getNombreAttaque() <= 0)
                     {
-                        $PersonnageAttaquer->setMort();    
-                    }
-                    $PersonnageManager->update($PersonnageAttaquer);   
-                    $PersonnageManager->update($Personnage); 
-                }  
-            }
-            
-             $PersonnageTypeManager = new PersonnageTypeManager($db);
-             $PersonnageType = new PersonnageType($PersonnageTypeManager->get($Personnage->getPersonnageTypeId()));
-
-            $listeAdversaire = $PersonnageManager->getAdversaire($Joueur->getId(),$Personnage->getPlanId());
-                $Adversaires = array();
-                if(count($listeAdversaire) > 0)
-                {
-                    foreach ($listeAdversaire as $key => $item) 
+                        $nombreAttaqueDisponible = false;
+                        $_SESSION['nombreAttaqueDisponible'] = $nombreAttaqueDisponible;
+                    }    
+                    else
                     {
-                        $Adversaires[] = new Personnage($PersonnageManager->get($item->id));
-                    }
+                        $Personnage->setNombreAttaque($Personnage->getNombreAttaque()-1);
+                        $Personnage->setExperience($Personnage->getExperience()+5);
+                        $PersonnageAttaquer->recevoirDegat($Personnage->getDegat());
+                        if($PersonnageAttaquer->isMort())
+                        {
+                            $PersonnageAttaquer->setMort();    
+                        }
+                        $PersonnageManager->update($PersonnageAttaquer);   
+                        $PersonnageManager->update($Personnage); 
+                        $_SESSION['personnage'] = $Personnage;
+                        $_SESSION['personnageAttaquer'] = $PersonnageAttaquer;
+                    }  
                 }
-                
-             $PersonnagesTemp = array_merge($Personnages,$Adversaires);
-             $direction = $Personnage->getDirection($PersonnagesTemp, $Carte);   
-             
-            $smarty->assign('adversaires', $Adversaires);
-            $smarty->assign('nombreAttaqueDisponible', $nombreAttaqueDisponible);
-            $smarty->assign('seToucher', $seToucher);
-            $smarty->assign('carte', $Carte);
-            $smarty->assign('direction', $direction);
-            $smarty->assign('personnage', $Personnage);
-            $smarty->assign('personnageAttaquer', $PersonnageAttaquer);
-            $smarty->assign('personnages', $Personnages);
-            $smarty->assign('personnageType', $PersonnageType);
+                else{
+                                $_SESSION['tourDisponible'] = false;
 
-            $json = array();
-            $json['map'] = utf8_encode($smarty->fetch('map.tpl'));
-            $json['caracteristique'] = utf8_encode($smarty->fetch('caracteristique.tpl'));
-            $json['message'] = $smarty->fetch('message/messageAttaque.tpl');
+                }
+
+            }
+                    require_once 'jeu.php';
             
-            echo json_encode($json);
+            
+            
             break;
     endswitch;
 }

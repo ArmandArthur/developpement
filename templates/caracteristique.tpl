@@ -6,6 +6,10 @@ Caracteristiques de {$personnage->getNom()}
         <td>{$personnage->getDegat()}</td>
     </tr>
     <tr>
+        <td>Experience : </td>
+        <td>{$personnage->getExperience()}</td>
+    </tr>    
+    <tr>
         <td>Mouvement : </td>
         <td>{$personnage->getMouvement()} / {$personnageType->getMouvement()}</td>
     </tr>

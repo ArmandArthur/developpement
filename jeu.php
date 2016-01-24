@@ -1,5 +1,8 @@
 <?php
-session_start();
+if (!isset($_SESSION))
+{   
+    session_start();
+}
 
 //Class
 require_once 'CarteManager.class.php';
@@ -12,7 +15,7 @@ require_once 'PersonnageType.class.php';
 require_once 'PersonnageTypeManager.class.php';
 
 //Smarty
-require 'smarty-3.1.29/libs/Smarty.class.php';
+require_once 'smarty-3.1.29/libs/Smarty.class.php';
 $smarty = new Smarty;
 $smarty->debugging = false;
 $smarty->caching = false;
@@ -27,15 +30,47 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
     $Joueur = new Joueur($JoueurManager->get($_SESSION['idJoueurCourant']));
     
     $listePersonnage = $JoueurManager->getListePersonnageFromJoueur($Joueur->getId());
-    
-    $personnagePrincipal =  array_slice($listePersonnage, 0, 1);
-    $listePersonnage =  array_slice($listePersonnage,1);
-    
-    $_SESSION['personnageCourant'] = $personnagePrincipal[0]->id;
-
     $PersonnageManager = new PersonnageManager($db);
+    $Personnages = array();
+    $i = 0;
+    
+    if(count($listePersonnage) > 0)
+    {
+        foreach ($listePersonnage as $key => $item) 
+        {
+            if(!isset($_SESSION['personnageCourant']))
+            {
+                
+                if($i == 0)
+                {
+               
+                    $_SESSION['personnageCourant'] = $item->id;
+                }
+                else{
+                $Personnages[] = new Personnage($PersonnageManager->get($item->id));    
+                }
+                
+            }
+            else
+            {
+                if($item->id != $_SESSION['personnageCourant'])
+                {
+                    $Personnages[] = new Personnage($PersonnageManager->get($item->id));
+                }
+            }
+            
+            
+           $i = $i + 1; 
+        }
+    }    
+    
+    
+    
+
+
+    
     $Personnage = new Personnage($PersonnageManager->get($_SESSION['personnageCourant']));
-   if( strtotime(date('Y-m-d H:i:s')) > strtotime($Personnage->getProchainTourDeJeu()) )
+   if($Personnage->tourDisponible() == false)
     {
        $Personnage->setMouvement(0);
        $Personnage->setNombreAttaque(0);
@@ -44,15 +79,6 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
     $CarteManager = new CarteManager($db);
     $Carte = new Carte($CarteManager->get($Personnage->getPlanId()));
     
-    $Personnages = array();
-    
-    if(count($listePersonnage) > 0)
-    {
-        foreach ($listePersonnage as $key => $item) 
-        {
-            $Personnages[] = new Personnage($PersonnageManager->get($item->id));
-        }
-    }
     
     $listeAdversaire = $PersonnageManager->getAdversaire($Joueur->getId(),$Personnage->getPlanId());
     $Adversaires = array();
@@ -65,7 +91,6 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
     }
     $PersonnagesTemp = array_merge($Personnages,$Adversaires);
     $direction = $Personnage->getDirection($PersonnagesTemp, $Carte);
-
     $PersonnageTypeManager = new PersonnageTypeManager($db);
     $PersonnageType = new PersonnageType($PersonnageTypeManager->get($Personnage->getPersonnageTypeId()));
 
@@ -75,7 +100,38 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
     $smarty->assign('personnages', $Personnages);
     $smarty->assign('adversaires', $Adversaires);
     $smarty->assign('personnageType', $PersonnageType);
-    $smarty->display('page/jeu.tpl');
+    
+     $smarty->assign('messageMouvement', false);
+     $smarty->assign('messageAttaque', false);
+    
+    if(isset($_SESSION['ajax']) && $_SESSION['ajax'] == true)
+    {
+       
+        if(isset($_SESSION['messageMouvement']) && $_SESSION['messageMouvement'] == true)
+        {
+            $smarty->assign('tourDisponible', $_SESSION['tourDisponible']);
+            $smarty->assign('messageMouvement', true);
+            $smarty->assign('messageMouvementContent', $smarty->fetch('message/messageMouvement.tpl'));
+        }
+        if(isset($_SESSION['messageAttaque']) && $_SESSION['messageAttaque'] == true)
+        {
+            $smarty->assign('seToucher', $_SESSION['seToucher']);
+            $smarty->assign('nombreAttaqueDisponible', $_SESSION['nombreAttaqueDisponible']);
+            $smarty->assign('tourDisponible', $_SESSION['tourDisponible']);
+            $smarty->assign('personnageAttaquer', $_SESSION['personnageAttaquer']);
+            $smarty->assign('messageAttaque', true);
+            $smarty->assign('messageAttaqueContent', $smarty->fetch('message/messageAttaque.tpl'));
+        }
+        $smarty->display('page/jeu.tpl');
+        $_SESSION['ajax'] = false;
+        $_SESSION['messageMouvement'] = false;
+        $_SESSION['messageAttaque'] = false;
+    }
+    else {
+       $smarty->display('page/page.tpl'); 
+       
+    }
+    
 }
 else
 {

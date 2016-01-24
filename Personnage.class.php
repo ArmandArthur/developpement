@@ -5,7 +5,9 @@ require_once 'CarteManager.class.php';
 class Personnage
 {
         // Attributs personnnage
+	private $chemin;
 	private $degat;
+	private $experience;
 	private $id;
         private $personnageTypeId;
 	private $nom;
@@ -79,6 +81,21 @@ class Personnage
                 return true;
             }
         }
+        
+	/*
+            Retourne si les attaques sont disponible
+	*/        
+        public function tourDisponible()
+        {
+            $tourDisponible = true;
+            
+            // Si le tour est expiré
+            if( strtotime(date('Y-m-d H:i:s')) > strtotime($this->getProchainTourDeJeu()) )
+            {
+                $tourDisponible = false;
+            }    
+            return $tourDisponible;
+        }
 	/*
             Retourne la liste des déplacements possibles.
 	*/
@@ -120,11 +137,21 @@ class Personnage
 		return $direction;
 	}
 	//Getters
+	public function getChemin()
+	{
+		return $this->chemin;
+	}
+        
 	public function getDegat()
 	{
 		return $this->degat;
 	}
 
+	public function getExperience()
+	{
+		return $this->experience;
+	}
+        
 	public function getId()
 	{
 		return $this->id;
@@ -181,9 +208,19 @@ class Personnage
 	}
         
 	// Setters
+	public function setChemin($chemin)
+	{
+		$this->chemin = $chemin;
+	}
+
 	public function setDegat($degat)
 	{
 		$this->degat = $degat;
+	}
+        
+	public function setExperience($experience)
+	{
+		$this->experience = $experience;
 	}
 
 	public function setId($id)

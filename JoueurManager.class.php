@@ -54,11 +54,11 @@ class JoueurManager extends Manager
             FROM 
                 personnage 
             LEFT JOIN 
-                liaison_joueur_personnage 
+                _joueur_personnage 
             ON 
-                personnage.id = liaison_joueur_personnage.personnageId 
+                personnage.id = _joueur_personnage.personnageId 
             WHERE 
-                liaison_joueur_personnage.joueurId = :id
+                _joueur_personnage.joueurId = :id
             AND 
                 personnage.planId = :planId
             ');

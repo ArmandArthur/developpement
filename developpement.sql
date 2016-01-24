@@ -69,20 +69,20 @@ INSERT INTO `joueur` (`id`, `login`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `liaison_joueur_personnage`
+-- Structure de la table `_joueur_personnage`
 --
 
-DROP TABLE IF EXISTS `liaison_joueur_personnage`;
-CREATE TABLE IF NOT EXISTS `liaison_joueur_personnage` (
+DROP TABLE IF EXISTS `_joueur_personnage`;
+CREATE TABLE IF NOT EXISTS `_joueur_personnage` (
   `joueurId` int(5) NOT NULL,
   `personnageId` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `liaison_joueur_personnage`
+-- Contenu de la table `_joueur_personnage`
 --
 
-INSERT INTO `liaison_joueur_personnage` (`joueurId`, `personnageId`) VALUES
+INSERT INTO `_joueur_personnage` (`joueurId`, `personnageId`) VALUES
 (3, 1),
 (3, 5),
 (2, 2),
@@ -91,20 +91,20 @@ INSERT INTO `liaison_joueur_personnage` (`joueurId`, `personnageId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `liaison_personnage_personnagetype`
+-- Structure de la table `_personnage_personnagetype`
 --
 
-DROP TABLE IF EXISTS `liaison_personnage_personnagetype`;
-CREATE TABLE IF NOT EXISTS `liaison_personnage_personnagetype` (
+DROP TABLE IF EXISTS `_personnage_personnagetype`;
+CREATE TABLE IF NOT EXISTS `_personnage_personnagetype` (
   `personnageId` int(3) NOT NULL,
   `personnageTypeId` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `liaison_personnage_personnagetype`
+-- Contenu de la table `_personnage_personnagetype`
 --
 
-INSERT INTO `liaison_personnage_personnagetype` (`personnageId`, `personnageTypeId`) VALUES
+INSERT INTO `_personnage_personnagetype` (`personnageId`, `personnageTypeId`) VALUES
 (1, 1),
 (2, 1),
 (3, 1),
