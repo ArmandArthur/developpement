@@ -4,6 +4,7 @@ class PersonnageType
 {
         // Attributs personnnage type
 	private $id;
+	private $degat;
 	private $nom;
 	private $nombreAttaque;        
         private $mouvement;
@@ -32,6 +33,11 @@ class PersonnageType
 	{
 		return $this->id;
 	}
+        
+	public function getDegat()
+	{
+		return $this->degat;
+	}        
 
         public function getMouvement()
 	{
@@ -54,6 +60,16 @@ class PersonnageType
 	}
 	
 	// Setters
+        public function setId($id)
+	{
+		$this->id = $id;
+	}
+        
+        public function setDegat($degat)
+	{
+		$this->degat = $degat;
+	}        
+        
         public function setMouvement($mouvement)
 	{
 		$this->mouvement = $mouvement;

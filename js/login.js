@@ -6,7 +6,7 @@ $( document ).ready(function() {
                   data: { login: $(this).val() , action:'seLoguer'}
                 }).done(function(response) {
                     if(response == 1){
-                        document.location.href = 'jeu.php';
+                        document.location.href = 'homepage.php';
                     }
                 });
             });

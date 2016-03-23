@@ -4,25 +4,8 @@ if (!isset($_SESSION))
     session_start();
 }
 
-//Class
-require_once 'CarteManager.class.php';
-require_once 'Carte.class.php';
-require_once 'JoueurManager.class.php';
-require_once 'Joueur.class.php';
-require_once 'PersonnageManager.class.php';
-require_once 'Personnage.class.php';
-require_once 'PersonnageType.class.php';
-require_once 'PersonnageTypeManager.class.php';
-
-//Smarty
-require_once 'smarty-3.1.29/libs/Smarty.class.php';
-$smarty = new Smarty;
-$smarty->debugging = false;
-$smarty->caching = false;
-$smarty->cache_lifetime = 120;
-
-//PDO
-$db = new PDO('mysql:host=localhost;dbname=developpement', 'root','');
+require_once 'initClass.php';
+require_once 'init.php';
 
 if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
 {
@@ -63,13 +46,8 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
            $i = $i + 1; 
         }
     }    
-    
-    
-    
+   $Personnage = new Personnage($PersonnageManager->get($_SESSION['personnageCourant']));
 
-
-    
-    $Personnage = new Personnage($PersonnageManager->get($_SESSION['personnageCourant']));
    if($Personnage->tourDisponible() == false)
     {
        $Personnage->setMouvement(0);
@@ -93,7 +71,30 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
     $direction = $Personnage->getDirection($PersonnagesTemp, $Carte);
     $PersonnageTypeManager = new PersonnageTypeManager($db);
     $PersonnageType = new PersonnageType($PersonnageTypeManager->get($Personnage->getPersonnageTypeId()));
-
+    
+    $EvolutionManager = new EvolutionManager($db);
+    
+    // Récuperation de la liste des évolutions correspondant au personnage type
+    $evolutionGetBy = $EvolutionManager->getBy('personnageTypeId', $Personnage->getPersonnageTypeId());
+    
+    $listeEvolution = array();
+    if(count($evolutionGetBy) > 0)
+    {
+        foreach ($evolutionGetBy as $evolution) 
+        {
+            // Instance de chaque evolution
+            $iEvolution = new Evolution($evolution);
+            
+            // Si l'expérience du personnage est comprise dans la tranche d'evolution
+            if( $iEvolution->getPalierInferieur() <= $Personnage->getExperience() && $iEvolution->getPalierSuperieur() > $Personnage->getExperience())
+            {
+                $iconePersonnageId = $iEvolution->getIconePersonnageId();
+                $Personnage->setIconePersonnageId($iconePersonnageId);
+                $PersonnageManager->update_iconepersonnage_personnage($Personnage);
+            }
+        }
+    }
+    
     $smarty->assign('carte', $Carte);
     $smarty->assign('direction', $direction);
     $smarty->assign('personnage', $Personnage);
@@ -128,7 +129,7 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
         $_SESSION['messageAttaque'] = false;
     }
     else {
-       $smarty->display('page/page.tpl'); 
+       $smarty->display('page/pageJeu.tpl'); 
        
     }
     

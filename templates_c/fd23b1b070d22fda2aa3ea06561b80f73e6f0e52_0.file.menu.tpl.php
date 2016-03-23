@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-01-23 18:00:26
+/* Smarty version 3.1.29, created on 2016-03-22 18:23:25
   from "C:\wamp\www\developpement\templates\menu.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56a3b1aa837aa1_62410002',
+  'unifunc' => 'content_56f17f8d3ef116_95555743',
   'file_dependency' => 
   array (
     'fd23b1b070d22fda2aa3ea06561b80f73e6f0e52' => 
     array (
       0 => 'C:\\wamp\\www\\developpement\\templates\\menu.tpl',
-      1 => 1453568423,
+      1 => 1458667402,
       2 => 'file',
     ),
   ),
@@ -19,34 +19,35 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56a3b1aa837aa1_62410002 ($_smarty_tpl) {
+function content_56f17f8d3ef116_95555743 ($_smarty_tpl) {
 ?>
-<a href="">Admin carte</a>
-<select id="selectPersonnage">
-    <option value="<?php echo $_smarty_tpl->tpl_vars['personnage']->value->getId();?>
-"><?php echo $_smarty_tpl->tpl_vars['personnage']->value->getNom();?>
-</option>
-    <?php
-$_from = $_smarty_tpl->tpl_vars['personnages']->value;
-if (!is_array($_from) && !is_object($_from)) {
-settype($_from, 'array');
-}
-$__foreach_personnage_0_saved_item = isset($_smarty_tpl->tpl_vars['personnage']) ? $_smarty_tpl->tpl_vars['personnage'] : false;
-$_smarty_tpl->tpl_vars['personnage'] = new Smarty_Variable();
-$_smarty_tpl->tpl_vars['personnage']->_loop = false;
-foreach ($_from as $_smarty_tpl->tpl_vars['personnage']->value) {
-$_smarty_tpl->tpl_vars['personnage']->_loop = true;
-$__foreach_personnage_0_saved_local_item = $_smarty_tpl->tpl_vars['personnage'];
-?>
-        <option value="<?php echo $_smarty_tpl->tpl_vars['personnage']->value->getId();?>
-" ><?php echo $_smarty_tpl->tpl_vars['personnage']->value->getNom();?>
-</option>
-    <?php
-$_smarty_tpl->tpl_vars['personnage'] = $__foreach_personnage_0_saved_local_item;
-}
-if ($__foreach_personnage_0_saved_item) {
-$_smarty_tpl->tpl_vars['personnage'] = $__foreach_personnage_0_saved_item;
-}
-?>
-</select><?php }
+<div id="menu">
+    <ul class="menu" id="menuAdmin">
+        <li>
+            <a href="adminEvolution.php">Evolution</a>
+        </li>
+        <li>
+            <a href="#">Icônes</a>
+            <ul>
+                <li>
+                    <a href="adminIconePersonnage.php">personnages</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Personnage</a>
+            <ul>
+                <li>
+                    <a href="adminCreatePersonnage.php">créer</a>
+                </li>
+            </ul>
+        </li>        
+    </ul>
+    <ul class="menu" id="menuPlayer">
+        <li>
+            <a href="jeu.php">Jeu</a>
+        </li>
+    </ul>
+</div>
+<?php }
 }

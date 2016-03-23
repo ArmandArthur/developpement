@@ -4,7 +4,7 @@
       {elseif $nombreAttaqueDisponible eq false}
           Vous n'avez plus d'attaque de disponible
       {elseif $tourDisponible eq false}
-          Votre tour est expiré
+          Votre tour a expiré
       {else}
         Vous infligez {$personnage->getDegat()} dégats à {$personnageAttaquer->getNom()}.
         {if $personnageAttaquer->isMort() eq true}

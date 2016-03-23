@@ -16,14 +16,14 @@ require_once 'JoueurManager.class.php';
 require_once 'Joueur.class.php';
 
 $JoueurManager = new JoueurManager($db);
-$listeJoueur = $JoueurManager->getListeJoueur();
+$listeJoueur = $JoueurManager->getAll();
 
 $Joueurs = array();
 if(count($listeJoueur) > 0)
 {
     foreach ($listeJoueur as $key => $item) 
     {
-        $Joueurs[] = new Joueur($JoueurManager->get($item->id));
+        $Joueurs[] = new Joueur($JoueurManager->get($item['id']));
     }
 }
 $smarty->assign('joueurs', $Joueurs);

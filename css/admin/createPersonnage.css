@@ -1,0 +1,9 @@
+#createPersonnage{
+    padding: 10px;
+}
+
+#createPersonnage #ajouter,
+#createPersonnage #liste{
+    width: 324px;
+}
+

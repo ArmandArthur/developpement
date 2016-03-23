@@ -4,6 +4,10 @@
         float:left;
         clear:left;
 }
+#map div.icon{
+    background-color: #D8D8D8;
+}
+
 .icon{
 	width: 45px;
 	border: 1px solid black;

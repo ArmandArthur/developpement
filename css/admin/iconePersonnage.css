@@ -1,0 +1,12 @@
+#iconePersonnage{
+    padding: 10px;
+}
+
+#iconePersonnage #ajouter,
+#iconePersonnage #liste{
+    width: 324px;
+}
+
+#iconePersonnage #liste img{
+    width: 35px;
+}

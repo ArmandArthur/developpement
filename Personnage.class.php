@@ -8,7 +8,9 @@ class Personnage
 	private $chemin;
 	private $degat;
 	private $experience;
+	private $pointInvestissement;
 	private $id;
+        private $iconePersonnageId;
         private $personnageTypeId;
 	private $nom;
         private $nombreAttaque;
@@ -177,6 +179,11 @@ class Personnage
 		return $this->pointDeVie;
 	}
         
+        public function getIconePersonnageId()
+        {
+            return $this->iconePersonnageId;
+        }
+        
 	public function getPersonnageTypeId()
 	{
 		return $this->personnageTypeId;
@@ -186,7 +193,12 @@ class Personnage
 	{
 		return $this->planId;
 	}
-	
+
+        public function getPointInvestissement()
+	{
+		return $this->pointInvestissement;
+	}
+        
 	public function getPositionX()
 	{
 		return $this->positionX;
@@ -228,6 +240,11 @@ class Personnage
 		$this->id = $id;
 	}
 
+	public function setIconePersonnageId($iconePersonnageId)
+	{
+		$this->iconePersonnageId = $iconePersonnageId;
+	}
+        
         public function setMouvement($mouvement)
 	{
 		$this->mouvement = $mouvement;
@@ -258,6 +275,11 @@ class Personnage
 		$this->planId = $planId;
 	}
 	
+        public function setPointInvestissement($pointInvestissement)
+	{
+		$this->pointInvestissement = $pointInvestissement;
+	}
+        
 	public function setPositionX($positionX)
 	{
 		$this->positionX = $positionX;

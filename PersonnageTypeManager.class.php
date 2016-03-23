@@ -17,5 +17,20 @@ class PersonnageTypeManager extends Manager
         $resultat = $request->fetch(PDO::FETCH_ASSOC);
 
         return $resultat;
-    }		
+    }
+    
+    public function getAll()
+    {
+        $request = $this->db->prepare('
+        SELECT 
+            * 
+        FROM 
+            personnageType
+        ORDER BY
+            nom');
+        $request->execute();
+        $resultats = $request->fetchAll(PDO::FETCH_OBJ);
+
+        return $resultats;
+    }
 }

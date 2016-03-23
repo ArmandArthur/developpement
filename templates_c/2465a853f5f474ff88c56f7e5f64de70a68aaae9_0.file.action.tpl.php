@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-01-05 16:09:04
+/* Smarty version 3.1.29, created on 2016-02-13 22:53:35
   from "C:\wamp\www\developpement\templates\action.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_568bdc90a68155_98075895',
+  'unifunc' => 'content_56bfa5df75a343_86833924',
   'file_dependency' => 
   array (
     '2465a853f5f474ff88c56f7e5f64de70a68aaae9' => 
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_568bdc90a68155_98075895 ($_smarty_tpl) {
+function content_56bfa5df75a343_86833924 ($_smarty_tpl) {
 ?>
 <img class="actionPersonnage" id="actionAttaque" src="img/attaque.gif" /><?php }
 }

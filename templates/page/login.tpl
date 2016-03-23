@@ -6,6 +6,6 @@
     <span> Liste des joueurs</span>
     <br />
 {foreach from=$joueurs item=joueur}
-        <span>{$joueur->getLogin()}</span> ,
+        <span>{$joueur->getLogin()} ({$joueur->getId()})</span> ,
 {/foreach}
 </div>

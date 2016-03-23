@@ -1,7 +1,62 @@
 #menu{
-    height: 25px;
-    background: black;
+    height: auto;
+    background: #181818;
     width: 100%;
     position:relative;
+    padding: 4px;
+}
+
+#menuAdmin{
+    margin-bottom: 5px;
+}
+
+#menuAdmin.menu > li {
+    background-image: linear-gradient(#A04B4F 50%, #984347 50%);
+}
+#menuPlayer.menu > li {
+    background-image: linear-gradient(#4C5E9D 50%, #485995 50%);
+}
+
+/* CSS MENU */
+
+.menu a { 
+	display:block; 
+	color: #fff; 
+	text-decoration:none;
+}
+.menu > li,
+.menu > li li {
+	position: relative;
+	display:inline-block;
+	width: 80px;
+	padding: 3px 7px;
+}
+.menu > li li { background: transparent none; }
+.menu > li li a { color: #444; }
+.menu > li li:hover { background:#ddd; }
+
+.menu > li:hover {
+	//background-image: linear-gradient(#ccc, #aaa 50%, #999 50%,#bbb);
+}
+/* (presque) fin de la partie positionnement/déco */
+/* dans cette déclaration, on fixe le max-height */
+.menu ul {
+	position: absolute;
+	top: 19px; left: 0;
+	max-height:0em;	
+	margin: 0; padding: 0;
+	background-color: #ddd;
+	background-image: linear-gradient(#fff,#ddd);
+	overflow: hidden;
+	transition: 0.8s max-height 0.3s;
+	border-radius: 0 0 2px 2px;
+}
+.menu ul a{
+    font-size:11px;
+}
+/* ici on change la valeur de max-height au :hover */
+.menu > li:hover ul {
+	/* à adapter, le minimum est le meilleur mais voyez large 😉 */
+	max-height: 13em;
 }
 

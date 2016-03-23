@@ -1,3 +1,9 @@
+<select id="selectPersonnage">
+    <option value="{$personnage->getId()}">{$personnage->getNom()}</option>
+    {foreach from=$personnages item=personnage}
+        <option value="{$personnage->getId()}" >{$personnage->getNom()}</option>
+    {/foreach}
+</select>  
 <div id="message">
     {if $messageMouvement eq "true" }
         {$messageMouvementContent}
@@ -5,9 +11,6 @@
     {if $messageAttaque eq "true" }
         {$messageAttaqueContent}
     {/if}
-</div>
-<div id="menu">
-    {include file='menu.tpl'}
 </div>
 <div id="map">
     {include file='map.tpl'}

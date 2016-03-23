@@ -1,4 +1,4 @@
 <?php
 
-define("INT_TOUR_DE_JEU", 10);
+define("INT_TOUR_DE_JEU", 150);
 

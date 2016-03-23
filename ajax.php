@@ -140,6 +140,7 @@ if (isset($_REQUEST)) {
                     {
                         $Personnage->setNombreAttaque($Personnage->getNombreAttaque()-1);
                         $Personnage->setExperience($Personnage->getExperience()+5);
+                        $Personnage->setPointInvestissement($Personnage->getPointInvestissement()+100);
                         $PersonnageAttaquer->recevoirDegat($Personnage->getDegat());
                         if($PersonnageAttaquer->isMort())
                         {

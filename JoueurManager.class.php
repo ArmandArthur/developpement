@@ -33,34 +33,36 @@ class JoueurManager extends Manager
         return $resultat;
     }
     
-    public function getListeJoueur()
+    public function getAll()
     {
         $request = $this->db->prepare('
             SELECT 
                 * 
             FROM 
-                joueur 
+                joueur
+            ORDER BY
+                joueur.login ASC
             ');
         $request->execute();
-        $resultats = $request->fetchAll(PDO::FETCH_OBJ);
+        $resultats = $request->fetchAll(PDO::FETCH_ASSOC);
         return $resultats;
     }
     
     public function getListePersonnageFromJoueur($id)
     {
         $request = $this->db->prepare('
-            SELECT 
-            * 
-            FROM 
-                personnage 
-            LEFT JOIN 
-                _joueur_personnage 
-            ON 
-                personnage.id = _joueur_personnage.personnageId 
-            WHERE 
-                _joueur_personnage.joueurId = :id
-            AND 
-                personnage.planId = :planId
+                SELECT 
+                * 
+                FROM 
+                    personnage 
+                LEFT JOIN 
+                    _joueur_personnage 
+                ON 
+                    personnage.id = _joueur_personnage.personnageId 
+                WHERE 
+                    _joueur_personnage.joueurId = :id
+                AND 
+                    personnage.planId = :planId
             ');
         $request->bindValue(':id', $id);
         $request->bindValue(':planId', 1);

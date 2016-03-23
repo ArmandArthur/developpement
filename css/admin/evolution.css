@@ -1,0 +1,82 @@
+#evolution{
+    padding: 10px;
+}
+
+#evolution h1{
+    background-color: #D8D8D8;
+    padding: 5px 2px;
+    -webkit-border-radius:2px
+}
+
+#evolution #ajouter,
+#evolution #liste{
+    width: 324px;
+}
+
+#evolution #ajouter{
+    margin-bottom:10px;
+}
+
+#evolution #liste table{
+    width:100%;
+    margin-top: 5px;
+}
+
+#evolution #liste td,
+#evolution #liste th{
+    width: 33.3%;
+    vertical-align: middle;
+    border:1px solid #C1C1C1;
+}
+
+#evolution #liste th{
+    text-align: left;
+    background-color: #C8D5E1;
+    padding: 3px;
+}
+#evolution #liste img{
+    width:35px;
+}
+
+/****************************************/
+/*  SELECT IMAGE  : Icone personnage Id */
+/****************************************/
+
+.dropdownCell{
+    border : 1px solid #bbb;
+    width: 172px;
+    height: 23px;
+    cursor: pointer;
+    float:left;
+}
+
+.dropdownCell img{
+    margin : 0px 3px 0px 3px;
+    vertical-align: middle;
+    width: 31px;
+}
+
+.dropdownPanel{
+    z-index:2;
+    border : 1px solid #bbb;
+    width: 172px;
+    position: absolute;
+    left: 150px;
+    top: 25px;
+}
+
+.dropdownOpt{
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.dropdownOpt img{
+    margin : 0px 3px 0px 3px;
+    vertical-align: middle;
+    width: 31px;
+}
+
+.dropdownOptSelected{
+    background-color: #ccc;
+}
+

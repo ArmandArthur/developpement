@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-01-23 15:01:13
+/* Smarty version 3.1.29, created on 2016-02-13 22:53:35
   from "C:\wamp\www\developpement\templates\caracteristique.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56a387a9e36055_83323891',
+  'unifunc' => 'content_56bfa5df749cf9_19712076',
   'file_dependency' => 
   array (
     'f9e2eb9cc26f252955b8b6a1c0642676555a0414' => 
     array (
       0 => 'C:\\wamp\\www\\developpement\\templates\\caracteristique.tpl',
-      1 => 1453557667,
+      1 => 1455382629,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56a387a9e36055_83323891 ($_smarty_tpl) {
+function content_56bfa5df749cf9_19712076 ($_smarty_tpl) {
 ?>
 Caracteristiques de <?php echo $_smarty_tpl->tpl_vars['personnage']->value->getNom();?>
 
@@ -35,6 +35,11 @@ Caracteristiques de <?php echo $_smarty_tpl->tpl_vars['personnage']->value->getN
         <td><?php echo $_smarty_tpl->tpl_vars['personnage']->value->getExperience();?>
 </td>
     </tr>    
+    <tr>
+        <td>Point Investissement : </td>
+        <td><?php echo $_smarty_tpl->tpl_vars['personnage']->value->getPointInvestissement();?>
+</td>
+    </tr>      
     <tr>
         <td>Mouvement : </td>
         <td><?php echo $_smarty_tpl->tpl_vars['personnage']->value->getMouvement();?>
