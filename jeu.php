@@ -37,16 +37,16 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
                 }
                 
             }
-            /*else
+            else
             {
                 if($item->id != $_SESSION['personnageCourant'])
                 {
-                    print('ij');
-                    var_dump(gettype( $PersonnageManager->get($item->id)));
+                    
+                    
                    
                     $Personnages[] = new Personnage($PersonnageManager->get($item->id));
                 }
-            }*/
+            }
             
             
            $i = $i + 1; 

@@ -49,14 +49,13 @@ if (isset($_REQUEST)) {
             require_once 'jeu.php';
             
         break;        
-        case 'seLoguer':
+        case 'chercherLogin':
             $login = $_REQUEST['login'];
             $JoueurManager = new JoueurManager($db);
-            $joueur = $JoueurManager->login($login);
-            if(is_array($joueur) && count($joueur) > 0)
+            $joueur = $JoueurManager->chercherLogin($login);
+            if(is_array($joueur) && count($joueur) == 1)
             {
-                $_SESSION['idJoueurCourant'] = $joueur['id'];
-                echo true;
+                echo json_encode(array('login'=>$joueur[0]['login']));
                 die();
             }
         break;

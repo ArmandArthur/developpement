@@ -1,17 +1,22 @@
 $( document ).ready(function() {
-	var loginEvent = function(){
-            $("#login").on("keyup", function() {
-                $.ajax({
-                  url: "ajax.php",
-                  data: { login: $(this).val() , action:'seLoguer'}
-                }).done(function(response) {
-                    if(response == 1){
-                        document.location.href = 'homepage.php';
-                    }
-                });
+    var chercherLoginEvent = function(){
+        $("#login").on("keyup", function() {
+            $.ajax({
+              url: "ajax.php",
+              data: { login: $(this).val() , action:'chercherLogin'}
+            }).done(function(response) {
+                obj = JSON.parse(response);
+                // La réponse est le nom du joueur
+                    console.info(typeof response);
+                    $("#login").val(obj.login);
+                    //$("#login").attr('value',response);
+               
             });
-	};
-        loginEvent();
+        });
+        };
+    
+    chercherLoginEvent();
+    //$("#login").val("art");
 });
 
 

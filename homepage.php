@@ -38,6 +38,7 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
 }
 else
 {
+   ;
     header('Location: index.php');    
 }
 ?>

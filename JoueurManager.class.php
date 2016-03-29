@@ -3,6 +3,23 @@ require_once 'Manager.class.php';
 
 class JoueurManager extends Manager
 {	
+    // Recherche un joueur dont le login contient le path
+    public function chercherLogin($path)
+    {
+        $request = $this->db->prepare('
+            SELECT 
+                * 
+            FROM 
+                joueur 
+            WHERE 
+                login LIKE :login');
+        $request->bindValue(':login', '%'.$path.'%');
+        $request->execute();
+        $resultats = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $resultats;
+    }
+    
+    // Recherche un joueur par son login
     public function login($login)
     {
         $request = $this->db->prepare('
@@ -18,6 +35,7 @@ class JoueurManager extends Manager
         return $resultat;
     }
     
+    // Recherche un joueur par son id
     public function get($id)
     {
         $request = $this->db->prepare('

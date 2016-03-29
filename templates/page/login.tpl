@@ -1,5 +1,7 @@
-<form method="post" action="">
-    <input type="text" id="login" /> 
+<form id="formLogin" method="post" action="index.php">
+    <input type="text" id="login" name="login" /> 
+    <input type="hidden" name="action" value="connecter"/>
+    <input type="submit" value="se connecter" />
 </form>
 
 <div id="listeJoueur">

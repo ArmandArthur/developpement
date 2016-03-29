@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-29 13:14:53
+/* Smarty version 3.1.29, created on 2016-03-29 22:15:02
   from "C:\wamp\www\developpement\templates\menu.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fa63ad5c8af5_55500212',
+  'unifunc' => 'content_56fae246744ab1_16339972',
   'file_dependency' => 
   array (
     'fd23b1b070d22fda2aa3ea06561b80f73e6f0e52' => 
     array (
       0 => 'C:\\wamp\\www\\developpement\\templates\\menu.tpl',
-      1 => 1459250089,
+      1 => 1459282491,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56fa63ad5c8af5_55500212 ($_smarty_tpl) {
+function content_56fae246744ab1_16339972 ($_smarty_tpl) {
 ?>
 <div id="menu">
     <?php if ($_smarty_tpl->tpl_vars['Privilege']->value->hasPermission('permission') || $_smarty_tpl->tpl_vars['Privilege']->value->hasPermission('role') || $_smarty_tpl->tpl_vars['Privilege']->value->hasPermission('rolePermission') || $_smarty_tpl->tpl_vars['Privilege']->value->hasPermission('roleJoueur')) {?>
@@ -95,7 +95,7 @@ function content_56fa63ad5c8af5_55500212 ($_smarty_tpl) {
         <li>
             <a href="http://localhost:81/phpmyadmin">phpmyadmin</a>
         </li>
-        <?php if ($_smarty_tpl->tpl_vars['Privilege']->value->hasPermission('changeCompte')) {?>
+        
         <li>
             <select id="menuJoueurId">
             <?php
@@ -153,9 +153,9 @@ $_smarty_tpl->tpl_vars['roleNom'] = $__foreach_item_0_saved_key;
 ?>-->
             </select>
         </li>
-        <?php }?>
+        
         <li>
-            <a href="index.php">Deco</a>
+            <a href="index.php?page=deco">Deco</a>
         </li>        
     </ul>
     

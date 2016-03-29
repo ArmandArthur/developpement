@@ -97,7 +97,7 @@
         </li>
         
         <li>
-            <a href="index.php">Deco</a>
+            <a href="index.php?page=deco">Deco</a>
         </li>        
     </ul>
     

@@ -1,6 +1,13 @@
 <?php
-session_start();
-session_destroy();
+if(!isset($_SESSION))
+{
+    session_start();
+}
+
+if(isset($_GET['page']) && $_GET['page']== 'deco')
+{
+    session_destroy();
+}
 
 //Smarty
 require 'smarty-3.1.29/libs/Smarty.class.php';
@@ -18,6 +25,21 @@ require_once 'Joueur.class.php';
 $JoueurManager = new JoueurManager($db);
 $listeJoueur = $JoueurManager->getAll();
 
+if(isset($_POST) && count($_POST) > 0 )
+{  
+   // Connexion
+   if($_POST['action'] == "connecter")
+   {
+       $joueur = $JoueurManager->login($_POST['login']);
+       if(is_array($joueur) && count($joueur) > 0)
+        {
+           
+            $_SESSION['idJoueurCourant'] = $joueur['id'];
+            header('Location: homepage.php');
+            
+        }
+   }
+}
 $Joueurs = array();
 if(count($listeJoueur) > 0)
 {
