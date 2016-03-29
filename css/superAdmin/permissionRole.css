@@ -1,0 +1,18 @@
+#permissionRole{
+    padding: 10px;
+}
+
+#permissionRole #ajouter,
+#permissionRole #liste{
+    width: 324px;
+}
+
+#permissionRole #ajouter .line{
+    overflow: hidden;
+    height: auto;
+}
+
+#permissionRole #ajouter .line .checkbox{
+    float: right;
+    clear:both;
+}

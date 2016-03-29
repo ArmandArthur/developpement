@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-17 22:06:14
+/* Smarty version 3.1.29, created on 2016-03-28 13:35:48
   from "C:\wamp\www\developpement\templates\page\pageJeu.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56eb1c46e618e1_19639809',
+  'unifunc' => 'content_56f91714eda336_42471684',
   'file_dependency' => 
   array (
     'f6b4bbd7ebdedf9aca482d199b0b0c56ddfa8bab' => 
     array (
       0 => 'C:\\wamp\\www\\developpement\\templates\\page\\pageJeu.tpl',
-      1 => 1458248772,
+      1 => 1459163706,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:page/jeu.tpl' => 1,
   ),
 ),false)) {
-function content_56eb1c46e618e1_19639809 ($_smarty_tpl) {
+function content_56f91714eda336_42471684 ($_smarty_tpl) {
 ?>
 <html>
 <head>
@@ -40,6 +40,9 @@ function content_56eb1c46e618e1_19639809 ($_smarty_tpl) {
 >
 <?php echo '<script'; ?>
  type="text/javascript" src="js/jeu.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="js/commun.js" ><?php echo '</script'; ?>
 >
 
 </head>

@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-21 13:15:43
+/* Smarty version 3.1.29, created on 2016-03-29 12:21:10
   from "C:\wamp\www\developpement\templates\admin\adminIconePersonnage.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56efe5efc91eb3_37794469',
+  'unifunc' => 'content_56fa571644abd8_02215327',
   'file_dependency' => 
   array (
     'ccd456a1ac665d675e0fdd3e07528ac6f1a3790f' => 
     array (
       0 => 'C:\\wamp\\www\\developpement\\templates\\admin\\adminIconePersonnage.tpl',
-      1 => 1458562542,
+      1 => 1459246863,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56efe5efc91eb3_37794469 ($_smarty_tpl) {
+function content_56fa571644abd8_02215327 ($_smarty_tpl) {
 ?>
 <div id="message">
     <?php if ($_smarty_tpl->tpl_vars['insertIconePersonnage']->value == "true") {?>
@@ -36,6 +36,8 @@ function content_56efe5efc91eb3_37794469 ($_smarty_tpl) {
                     <input type="file" id="chemin" name="chemin" />
                 </div>
                 <div class="line">
+                    <input type="hidden" id="uniqueId" name="uniqueId" value="<?php echo $_smarty_tpl->tpl_vars['FormulaireUniqueId']->value->displayUniqueId();?>
+"/>
                     <input type="submit" class="submit"></button>
                 </div>
         </form>

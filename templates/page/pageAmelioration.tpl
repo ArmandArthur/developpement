@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="css/message.css">
 
 <script type="text/javascript" src="js/jquery-2.1.4.min.js" ></script>
+<script type="text/javascript" src="js/commun.js" ></script>
 <script type="text/javascript" src="js/amelioration.js"></script>
 
 </head>

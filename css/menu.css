@@ -6,6 +6,30 @@
     padding: 4px;
 }
 
+/**********************************
+    Menu super admin
+***********************************/
+
+#menuSuperAdmin{
+    z-index:1;
+}
+
+#menuSuperAdmin{
+    margin-bottom: 5px;
+}
+
+#menuSuperAdmin.menu > li {
+    background-image: linear-gradient(#953C6B 50%, #893260 50%);
+}
+
+/**********************************
+    Menu admin
+***********************************/
+
+#menuAdmin{
+    z-index:2;
+}
+
 #menuAdmin{
     margin-bottom: 5px;
 }
@@ -13,11 +37,38 @@
 #menuAdmin.menu > li {
     background-image: linear-gradient(#A04B4F 50%, #984347 50%);
 }
+
+/**********************************
+    Menu joueur
+***********************************/
+
+#menuPlayer{
+    z-index:3;
+}
+
 #menuPlayer.menu > li {
     background-image: linear-gradient(#4C5E9D 50%, #485995 50%);
 }
 
-/* CSS MENU */
+/**********************************
+    Information du joueur && DECO
+***********************************/
+
+ #menuInformation
+ {
+    position: absolute;
+    color: white;
+    right: 30px;
+    top: 10px;
+ }
+ #menuInformation.menu > li
+ {
+     width:120px;
+ }
+ 
+/**********************************
+    CSS menu general/commun
+***********************************/
 
 .menu a { 
 	display:block; 
@@ -38,8 +89,7 @@
 .menu > li:hover {
 	//background-image: linear-gradient(#ccc, #aaa 50%, #999 50%,#bbb);
 }
-/* (presque) fin de la partie positionnement/déco */
-/* dans cette déclaration, on fixe le max-height */
+
 .menu ul {
 	position: absolute;
 	top: 19px; left: 0;
@@ -50,13 +100,15 @@
 	overflow: hidden;
 	transition: 0.8s max-height 0.3s;
 	border-radius: 0 0 2px 2px;
+        z-index:4;
 }
 .menu ul a{
     font-size:11px;
 }
-/* ici on change la valeur de max-height au :hover */
 .menu > li:hover ul {
-	/* à adapter, le minimum est le meilleur mais voyez large 😉 */
 	max-height: 13em;
 }
+
+
+
 

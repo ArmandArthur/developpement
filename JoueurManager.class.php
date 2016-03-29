@@ -14,7 +14,7 @@ class JoueurManager extends Manager
                 login = :login');
         $request->bindValue(':login', $login);
         $request->execute();
-        $resultat = $request->fetch(PDO::FETCH_OBJ);
+        $resultat = $request->fetch(PDO::FETCH_ASSOC);
         return $resultat;
     }
     
@@ -33,14 +33,26 @@ class JoueurManager extends Manager
         return $resultat;
     }
     
+    // Récupération des joueurs et de leur rôles
     public function getAll()
     {
         $request = $this->db->prepare('
             SELECT 
-                * 
+                joueur.*,
+                _joueur_role.roleId,
+                role.nom AS "roleNom"
             FROM 
                 joueur
+            LEFT JOIN
+                _joueur_role
+            ON
+                joueur.Id = _joueur_role.joueurId
+            LEFT JOIN
+                role
+            ON
+                _joueur_role.roleId = role.id
             ORDER BY
+                role.id ASC,
                 joueur.login ASC
             ');
         $request->execute();
@@ -69,5 +81,36 @@ class JoueurManager extends Manager
         $request->execute();
         $resultats = $request->fetchAll(PDO::FETCH_OBJ);
         return $resultats;
-    }    
+    }
+    
+    public function getPrivilege($id)
+    {
+        $request = $this->db->prepare('
+            SELECT 
+                joueur.*,
+                _joueur_role.roleId,
+                _permission_role.permissionId,
+                permission.nom
+            FROM 
+                joueur 
+            LEFT JOIN 
+                _joueur_role 
+            ON 
+                joueur.id = _joueur_role.joueurId
+            LEFT JOIN 
+                _permission_role 
+            ON 
+                _joueur_role.roleId = _permission_role.roleId
+            LEFT JOIN 
+                permission 
+            ON 
+                _permission_role.permissionId = permission.id                   
+            WHERE 
+                joueur.id = :id            
+        ');
+        $request->bindValue(':id', $id);
+        $request->execute();
+        $resultats = $request->fetchAll(PDO::FETCH_ASSOC);
+        return $resultats;
+    }
 }

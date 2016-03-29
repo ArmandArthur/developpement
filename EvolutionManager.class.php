@@ -2,10 +2,23 @@
 require_once 'Manager.class.php';
 
 class EvolutionManager extends Manager
-{		
+{	
+        public function delete($id)
+        {
+            $request = $this->db->prepare('
+            DELETE FROM 
+                evolution            
+            WHERE
+                evolution.id=:id');
+            
+            $request->bindValue(':id', $id);
+            $request->execute();
+        }   
+        
        public function insert(Evolution $evolution)
 	{
-            $request = $this->db->prepare('
+            
+           $request = $this->db->prepare('
             INSERT INTO 
                     evolution
                 (
@@ -31,6 +44,23 @@ class EvolutionManager extends Manager
             $request->bindValue(':iconePersonnageId', $evolution->getIconePersonnageId());
             $request->execute();
 	}
+        
+        public function get($id)
+        {
+            $request = $this->db->prepare('
+            SELECT 
+                evolution.*
+            FROM 
+                evolution
+            WHERE
+                evolution.id=:id');
+            
+            $request->bindValue(':id', $id);
+            $request->execute();
+            $resultats = $request->fetch(PDO::FETCH_ASSOC);
+		
+            return $resultats;
+        }
         
         public function getAll()
         {
@@ -67,5 +97,25 @@ class EvolutionManager extends Manager
 		
             return $resultats;
         }
+        
+        public function update(Evolution $evolution)
+	{
+            $request = $this->db->prepare('
+            UPDATE 
+                    evolution
+            SET 
+                    personnageTypeId = :personnageTypeId,
+                    palierInferieur = :palierInferieur,
+                    palierSuperieur = :palierSuperieur,
+                    iconePersonnageId = :iconePersonnageId
+            WHERE id = :id');
+
+            $request->bindValue(':id', $evolution->getId());
+            $request->bindValue(':personnageTypeId', $evolution->getPersonnageTypeId());
+            $request->bindValue(':palierInferieur', $evolution->getPalierInferieur());
+            $request->bindValue(':palierSuperieur', $evolution->getPalierSuperieur());
+            $request->bindValue(':iconePersonnageId', $evolution->getIconePersonnageId());
+            $request->execute();
+	}        
 }
 

@@ -1,0 +1,48 @@
+#joueurRole{
+    padding: 10px;
+}
+
+#joueurRole #ajouter,
+#joueurRole #liste{
+    width: 324px;
+}
+
+#joueurRole #liste{
+    width: 500px;
+}
+
+#joueurRole #liste .line{
+    padding: 3px 0px;
+    overflow:hidden;
+}
+
+#joueurRole #liste .line .groupe{
+    background-color: #CBD2E0;
+    padding: 4px;
+    -webkit-border-radius: 2px;
+    clear:left;
+    margin: 0 0 3px 0;
+    float:left;
+}
+
+#joueurRole #liste .line .joueurs{
+     padding: 4px 15px 4px 3px;
+     background-color: #D8D8D8;
+     -webkit-border-radius: 2px;
+     clear:left;
+     float:left;
+     position:relative;
+}
+
+#joueurRole #liste .line .joueurs .mif-cross{
+    position:absolute;
+    top: 9px;
+    right:4px;
+    font-size: 8px;
+    color: red;
+    cursor: pointer;
+}
+#joueurRole #liste .line .joueurs .mif-cross span{
+    display:none;
+}
+   

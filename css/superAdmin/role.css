@@ -1,0 +1,8 @@
+#role{
+    padding: 10px;
+}
+
+#role #ajouter,
+#role #liste{
+    width: 324px;
+}

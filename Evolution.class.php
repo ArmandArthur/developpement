@@ -61,9 +61,9 @@ class Evolution
 	
 	// Setters
 	
-	public function setId()
+	public function setId($id)
 	{
-		return $this->id;
+		$this->id = $id;
 	}        
         
         public function setPalierInferieur($palierInferieur)

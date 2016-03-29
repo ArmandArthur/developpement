@@ -11,13 +11,22 @@
                
         // création d'une liste
         function createList(f){
-            // créer la première zone, affichant l'option sélectionnée
-            var cell = $('<div class="dropdownCell"></div>');
+
            
             // créer la seconde zone, affichant toutes les options
             var dropdown = $('<div class="dropdownPanel"></div>');               
-                       
+            
+            var dropdownSelected = '';
             $(this).find("li").each(function(){
+               
+               
+                if($(this).hasClass('selected'))
+                {
+                    console.info($(this).attr("value"));
+                    dropdownSelected = $(this).html();
+                    $(opts.inputFormHiddenId).attr('value',$(this).attr("value"));
+                }
+                
                 dropdown.append($('<div class="dropdownOpt"></div>')
                     .click(onSelect)
                     .attr("value", $(this).attr("value"))
@@ -26,7 +35,11 @@
                            function(){$(this).removeClass("dropdownOptSelected");})
                 );
             });
-
+            
+            // créer la première zone, affichant l'option sélectionnée
+            // création après les li afin de récupérer la valeur du li selectionné
+            var cell = $('<div class="dropdownCell">'+dropdownSelected+'</div>');
+            
             // on masque la zone déroulante
             dropdown.hide();
             $.data(cell, "visible", false);
@@ -49,7 +62,8 @@
             });
            
             // fonction appelée à chaque sélection d'un élément
-            function onSelect(){           
+            function onSelect(){  
+                 console.info($(this));
                 cell.html($(this).html());
                 cell.attr("value", $(this).attr("value"));
                 dropdown.slideUp("fast");

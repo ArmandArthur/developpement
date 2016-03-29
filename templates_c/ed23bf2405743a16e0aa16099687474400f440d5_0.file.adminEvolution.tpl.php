@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-23 12:26:44
+/* Smarty version 3.1.29, created on 2016-03-29 12:40:05
   from "C:\wamp\www\developpement\templates\admin\adminEvolution.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56f27d74106e06_09087671',
+  'unifunc' => 'content_56fa5b8591da71_80713461',
   'file_dependency' => 
   array (
     'ed23bf2405743a16e0aa16099687474400f440d5' => 
     array (
       0 => 'C:\\wamp\\www\\developpement\\templates\\admin\\adminEvolution.tpl',
-      1 => 1458732368,
+      1 => 1459248000,
       2 => 'file',
     ),
   ),
@@ -19,17 +19,21 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56f27d74106e06_09087671 ($_smarty_tpl) {
+function content_56fa5b8591da71_80713461 ($_smarty_tpl) {
 ?>
 <div id="message">
     <?php if ($_smarty_tpl->tpl_vars['messageInsertEvolution']->value == "true") {?>
         <?php echo $_smarty_tpl->tpl_vars['messageInsertEvolutionContent']->value;?>
 
     <?php }?>
+    <?php if ($_smarty_tpl->tpl_vars['messageUpdateEvolution']->value == "true") {?>
+        <?php echo $_smarty_tpl->tpl_vars['messageUpdateEvolutionContent']->value;?>
+
+    <?php }?>    
 </div>
 <div id="evolution">
     <div id="ajouter">
-        <h1 class="warning">Les évolutions sont obligatoires.<br/><br/>
+        <h1 class="warning">
         Pour ajouter une évolution, il faut ajouter des icônes de personnage.</h1>
         <h1>Ajouter évolution</h1>
         <form id="formAjouterEvolution" action="adminEvolution.php" method="post">
@@ -48,9 +52,16 @@ foreach ($_from as $_smarty_tpl->tpl_vars['personnageType']->value) {
 $_smarty_tpl->tpl_vars['personnageType']->_loop = true;
 $__foreach_personnageType_0_saved_local_item = $_smarty_tpl->tpl_vars['personnageType'];
 ?>
-                        <option value="<?php echo $_smarty_tpl->tpl_vars['personnageType']->value->getId();?>
+                            <option 
+                            <?php if ($_smarty_tpl->tpl_vars['evolutionSelected']->value instanceof Evolution) {?>
+                                <?php if ($_smarty_tpl->tpl_vars['evolutionSelected']->value->getPersonnageTypeId() == $_smarty_tpl->tpl_vars['personnageType']->value->getId()) {?>
+                                    selected="selected"
+                                <?php }?>                            
+                            <?php }?>
+                            value="<?php echo $_smarty_tpl->tpl_vars['personnageType']->value->getId();?>
 " ><?php echo $_smarty_tpl->tpl_vars['personnageType']->value->getNom();?>
-</option>
+</option>                        
+                        
                     <?php
 $_smarty_tpl->tpl_vars['personnageType'] = $__foreach_personnageType_0_saved_local_item;
 }
@@ -62,11 +73,17 @@ $_smarty_tpl->tpl_vars['personnageType'] = $__foreach_personnageType_0_saved_ite
                 </div>
                 <div class="line">
                     <label for="palierInferieur">Palier inférieur:</label>
-                    <input id="palierInferieur" name="palierInferieur" type="text" /> 
+                    <input id="palierInferieur" name="palierInferieur" type="text" 
+                     value="<?php if ($_smarty_tpl->tpl_vars['evolutionSelected']->value instanceof Evolution) {
+echo $_smarty_tpl->tpl_vars['evolutionSelected']->value->getPalierInferieur();
+}?>"/> 
                 </div>
                 <div class="line">
                     <label for="palierSuperieur">Palier supérieur:</label>
-                    <input id="palierSuperieur" name="palierSuperieur" type="text" />
+                    <input id="palierSuperieur" name="palierSuperieur" type="text"
+                     value="<?php if ($_smarty_tpl->tpl_vars['evolutionSelected']->value instanceof Evolution) {
+echo $_smarty_tpl->tpl_vars['evolutionSelected']->value->getPalierSuperieur();
+}?>"/>
                 </div>
                 <div class="line">
                     <label for="iconePersonnageId">Icône personnage Id: </label>
@@ -83,10 +100,18 @@ foreach ($_from as $_smarty_tpl->tpl_vars['iconePersonnage']->value) {
 $_smarty_tpl->tpl_vars['iconePersonnage']->_loop = true;
 $__foreach_iconePersonnage_1_saved_local_item = $_smarty_tpl->tpl_vars['iconePersonnage'];
 ?>
-                            <li value="<?php echo $_smarty_tpl->tpl_vars['iconePersonnage']->value->getId();?>
-"><img src="<?php echo $_smarty_tpl->tpl_vars['iconePersonnage']->value->getChemin();?>
-" alt="" /><?php echo $_smarty_tpl->tpl_vars['iconePersonnage']->value->getChemin();?>
-</li>
+                            <li 
+                            <?php if ($_smarty_tpl->tpl_vars['evolutionSelected']->value instanceof Evolution) {?>
+                                <?php if ($_smarty_tpl->tpl_vars['evolutionSelected']->value->getIconePersonnageId() == $_smarty_tpl->tpl_vars['iconePersonnage']->value->getId()) {?>
+                                    class="selected"
+                                <?php }?>
+                            <?php }?>
+                                value="<?php echo $_smarty_tpl->tpl_vars['iconePersonnage']->value->getId();?>
+">
+                                <img src="<?php echo $_smarty_tpl->tpl_vars['iconePersonnage']->value->getChemin();?>
+" alt="" />
+                                
+                            </li>
                         <?php
 $_smarty_tpl->tpl_vars['iconePersonnage'] = $__foreach_iconePersonnage_1_saved_local_item;
 }
@@ -94,11 +119,19 @@ if ($__foreach_iconePersonnage_1_saved_item) {
 $_smarty_tpl->tpl_vars['iconePersonnage'] = $__foreach_iconePersonnage_1_saved_item;
 }
 ?>   
+                                      
                     </ul>
                     <input id="iconePersonnageId" name="iconePersonnageId" type="hidden" />
                 </div>
                 <div class="line">
-                    <input type="submit" class="submit"></button>
+                    <?php if ($_smarty_tpl->tpl_vars['evolutionSelected']->value instanceof Evolution) {?>
+                        <input type="hidden" name="id" value="<?php echo $_smarty_tpl->tpl_vars['evolutionSelected']->value->getId();?>
+" />
+                    <?php }?>
+                    <input type="hidden" id="uniqueId" name="uniqueId" value="<?php echo $_smarty_tpl->tpl_vars['FormulaireUniqueId']->value->displayUniqueId();?>
+"/>
+                    <input id="action" name="action" type="hidden" value="ajouter" />
+                    <input type="submit" class="submit">
                 </div>
         </form>
     </div>
@@ -129,6 +162,22 @@ $__foreach_evolution_2_saved_local_item = $_smarty_tpl->tpl_vars['evolution'];
 </td>
                <td><img src="<?php echo $_smarty_tpl->tpl_vars['evolution']->value->getIconePersonnagePath();?>
 " /></td>
+               <td>
+                   <form id="formModifierEvolution" action="adminEvolution.php" method="post">
+                       <input name="action" type="hidden" value="modifier" />
+                       <input name="id" type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['evolution']->value->getId();?>
+" />
+                       <input type="submit" value="modifier" />
+                   </form>
+               </td>
+               <td>
+                   <form id="formSupprimerEvolution" action="adminEvolution.php" method="post">
+                       <input id="action" name="action" type="hidden" value="supprimer" />
+                       <input name="id" type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['evolution']->value->getId();?>
+" />
+                       <input type="submit" value="supp" />
+                   </form>
+               </td>
            </tr>
         <?php
 $_smarty_tpl->tpl_vars['evolution'] = $__foreach_evolution_2_saved_local_item;

@@ -12,6 +12,7 @@
                     <input type="file" id="chemin" name="chemin" />
                 </div>
                 <div class="line">
+                    <input type="hidden" id="uniqueId" name="uniqueId" value="{$FormulaireUniqueId->displayUniqueId()}"/>
                     <input type="submit" class="submit"></button>
                 </div>
         </form>

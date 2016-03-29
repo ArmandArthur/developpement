@@ -53,12 +53,26 @@ if (isset($_REQUEST)) {
             $login = $_REQUEST['login'];
             $JoueurManager = new JoueurManager($db);
             $joueur = $JoueurManager->login($login);
-            if($joueur)
+            if(is_array($joueur) && count($joueur) > 0)
             {
-                $_SESSION['idJoueurCourant'] = $joueur->id;
+                $_SESSION['idJoueurCourant'] = $joueur['id'];
                 echo true;
+                die();
             }
         break;
+        case 'changerJoueur':
+            $joueurId = $_REQUEST['joueurId'];
+            $JoueurManager = new JoueurManager($db);
+            $joueur = $JoueurManager->get($joueurId); 
+
+            if(is_array($joueur) && count($joueur) > 0)
+            {
+                $_SESSION['personnageCourant'] = null;
+                $_SESSION['idJoueurCourant'] = $joueur['id'];
+                echo true;
+                die();
+            }
+        break;        
         case 'seDeplacer':
         $_SESSION['ajax'] = true;
         $_SESSION['tourDisponible'] = true;    

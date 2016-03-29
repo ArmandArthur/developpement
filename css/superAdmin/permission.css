@@ -1,0 +1,8 @@
+#permission{
+    padding: 10px;
+}
+
+#permission #ajouter,
+#permission #liste{
+    width: 324px;
+}

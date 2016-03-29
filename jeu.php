@@ -12,11 +12,14 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
     $JoueurManager = new JoueurManager($db);
     $Joueur = new Joueur($JoueurManager->get($_SESSION['idJoueurCourant']));
     
+    $Privilege = new Privilege($JoueurManager->getPrivilege($Joueur->getId()));
+    
     $listePersonnage = $JoueurManager->getListePersonnageFromJoueur($Joueur->getId());
+    //var_dump($listePersonnage);
     $PersonnageManager = new PersonnageManager($db);
     $Personnages = array();
     $i = 0;
-    
+
     if(count($listePersonnage) > 0)
     {
         foreach ($listePersonnage as $key => $item) 
@@ -34,18 +37,27 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
                 }
                 
             }
-            else
+            /*else
             {
                 if($item->id != $_SESSION['personnageCourant'])
                 {
+                    print('ij');
+                    var_dump(gettype( $PersonnageManager->get($item->id)));
+                   
                     $Personnages[] = new Personnage($PersonnageManager->get($item->id));
                 }
-            }
+            }*/
             
             
            $i = $i + 1; 
         }
-    }    
+    }
+    else
+    {
+      
+        header('Location: homepage.php');
+    }
+  
    $Personnage = new Personnage($PersonnageManager->get($_SESSION['personnageCourant']));
 
    if($Personnage->tourDisponible() == false)
@@ -74,7 +86,7 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
     
     $EvolutionManager = new EvolutionManager($db);
     
-    // Récuperation de la liste des évolutions correspondant au personnage type
+    //Récuperation de la liste des évolutions correspondant au personnage type
     $evolutionGetBy = $EvolutionManager->getBy('personnageTypeId', $Personnage->getPersonnageTypeId());
     
     $listeEvolution = array();
@@ -91,9 +103,29 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
                 $iconePersonnageId = $iEvolution->getIconePersonnageId();
                 $Personnage->setIconePersonnageId($iconePersonnageId);
                 $PersonnageManager->update_iconepersonnage_personnage($Personnage);
+                
+                //On met à jour le personnage
+                $Personnage = new Personnage($PersonnageManager->get($Personnage->getId()));
             }
         }
     }
+    
+    // Liste des joueurs
+    $listeJoueur = $JoueurManager->getAll();
+
+    // Contruction d'une variable selectJoueurs au format d'un optiongroup
+    $selectJoueurs = array();
+    if(count($listeJoueur) > 0)
+    {
+        foreach ($listeJoueur as $key => $item) 
+        {
+            if( !isset($selectJoueurs[$item['roleNom']]) )
+            {
+                $selectJoueurs[$item['roleNom']] = array();
+            }
+            array_push($selectJoueurs[$item['roleNom']],new Joueur($item))     ;
+        }
+    }        
     
     $smarty->assign('carte', $Carte);
     $smarty->assign('direction', $direction);
@@ -101,6 +133,9 @@ if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
     $smarty->assign('personnages', $Personnages);
     $smarty->assign('adversaires', $Adversaires);
     $smarty->assign('personnageType', $PersonnageType);
+    $smarty->assign('Joueur', $Joueur);
+    $smarty->assign('selectJoueurs', $selectJoueurs);
+    $smarty->assign('Privilege', $Privilege);
     
      $smarty->assign('messageMouvement', false);
      $smarty->assign('messageAttaque', false);
