@@ -79,7 +79,7 @@
         <li>
             <a href="http://localhost:81/phpmyadmin">phpmyadmin</a>
         </li>
-        {if $Privilege->hasPermission('changeCompte')}
+        
         <li>
             <select id="menuJoueurId">
             {foreach from=$selectJoueurs key=roleNom item=item }
@@ -95,7 +95,7 @@
             {/foreach}-->
             </select>
         </li>
-        {/if}
+        
         <li>
             <a href="index.php">Deco</a>
         </li>        
