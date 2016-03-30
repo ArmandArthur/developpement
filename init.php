@@ -11,3 +11,7 @@ define('projet','developpement');
 
 define('dossierIconePersonnage','img/personnage/');
 define('dossierIconePersonnageAbsolue',$_SERVER['DOCUMENT_ROOT'].projet.'/img/personnage/');
+
+$stromae = 'o8k';
+
+require_once 'initClass.php';   

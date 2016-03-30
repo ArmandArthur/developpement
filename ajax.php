@@ -55,7 +55,7 @@ if (isset($_REQUEST)) {
             $joueur = $JoueurManager->chercherLogin($login);
             if(is_array($joueur) && count($joueur) == 1)
             {
-                echo json_encode(array('login'=>$joueur[0]['login']));
+                echo $joueur[0]['login'];
                 die();
             }
         break;

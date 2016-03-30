@@ -4,9 +4,9 @@ if (!isset($_SESSION))
     session_start();
 }
 
-require_once 'initClass.php';
 require_once 'init.php';
 
+print($stromae);
 if(isset($_SESSION['idJoueurCourant']) && $_SESSION['idJoueurCourant'] != '')
 {
     $JoueurManager = new JoueurManager($db);

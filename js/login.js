@@ -5,10 +5,12 @@ $( document ).ready(function() {
               url: "ajax.php",
               data: { login: $(this).val() , action:'chercherLogin'}
             }).done(function(response) {
-                obj = JSON.parse(response);
+                        //obj = JSON.parse(response);
                 // La réponse est le nom du joueur
-                    console.info(typeof response);
-                    $("#login").val(obj.login);
+                    //console.info(typeof response);
+                    if(response){
+                    $("#login").val(response);
+                    }
                     //$("#login").attr('value',response);
                
             });
